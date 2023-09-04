@@ -12,10 +12,11 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
-      child: Text(
-        'Hello, world!',
-        style: Theme.of(context).textTheme.headline4,
-      ),
-    ));
+          child: Text(
+            'Hello, world!',
+            style: Theme.of(context).textTheme.headline4,
+          ),
+        ),
+    );
   }
 }
