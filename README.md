@@ -28,10 +28,10 @@ L'application de réseau de musculation RenconSport vise à offrir aux utilisate
 
 ## Technologies Utilisées
 
-- Front-end : Svelte
-- Back-end : Node.js, Firebase
-- Mobile : Flutter
-- Design : Tailwindcss
+- Front-end : ![Svelte](https://img.shields.io/badge/Front--end-Svelte-orange)
+- Back-end : ![Node.js](https://img.shields.io/badge/Back--end-Node.js-green), ![Firebase](https://img.shields.io/badge/Back--end-Firebase-yellow)
+- Mobile : ![Flutter](https://img.shields.io/badge/Mobile-Flutter-blue)
+- Design : ![Tailwind CSS](https://img.shields.io/badge/Design-Tailwindcss-purple)
 
 ---
 
@@ -40,7 +40,7 @@ L'application de réseau de musculation RenconSport vise à offrir aux utilisate
 ```bash
 git clone https://github.com/HardstyIe/RenconSport_Flutter_Front.git
 cd RenconSport_Flutter_Front
-pub get
+flutter pub get
 ```
 
 ---
