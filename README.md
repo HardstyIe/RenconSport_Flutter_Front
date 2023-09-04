@@ -31,16 +31,17 @@ L'application de réseau de musculation RenconSport vise à offrir aux utilisate
 - Front-end : Svelte
 - Back-end : Node.js, Firebase
 - Mobile : Flutter
+- Design : Tailwindcss
 
 ---
 
 ## Installation
 
-\```bash
+```bash
 git clone https://github.com/HardstyIe/RenconSport_Flutter_Front.git
 cd RenconSport_Flutter_Front
 pub get
-\```
+```
 
 ---
 
@@ -52,7 +53,7 @@ Ce projet est sous licence MIT - voir le fichier [LICENSE.md](LICENSE.md) pour p
 
 ## Autheur
 
-- **Hardstyle** - _Développeur_ - [Hardstyle](https://github.com/HardstyIe)
-- **Frenchcode59** - _Développeur_ - [Frenchode59](https://github.com/frenchcode59)
-- **BenCDA** - _Développeur_ - [BenCDA](https://github.com/BenCDA)
-- **Othman59** - _Développeur_ - [Othman59](https://github.com/Othman59)
+- **Duchemin Dylan** - _Développeur_ - [Hardstyle](https://github.com/HardstyIe)
+- **Denis Deroullers** - _Développeur_ - [Frenchode59](https://github.com/frenchcode59)
+- **Benjamin Cardoso D'Almeida** - _Développeur_ - [BenCDA](https://github.com/BenCDA)
+- **Othman Douz** - _Développeur_ - [Othman59](https://github.com/Othman59)
