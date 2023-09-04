@@ -1,16 +1,58 @@
-# renconsport
+# Application de Réseau de Musculation RenconSport
 
-A new Flutter project.
+## Table des matières
 
-## Getting Started
+- [Introduction](#introduction)
+- [Fonctionnalités](#fonctionnalités)
+- [Technologies Utilisées](#technologies-utilisées)
+- [Installation](#installation)
+- [Licence](#licence)
+- [Autheur](#autheur)
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+## Introduction
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+L'application de réseau de musculation RenconSport vise à offrir aux utilisateurs une plateforme conviviale pour planifier, suivre et partager leurs séances d'entraînement, ainsi que pour trouver des partenaires d'entraînement dans leur région.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+
+## Fonctionnalités
+
+- **Planification d'entraînement** : Créez et personnalisez vos propres plans d'entraînement.
+- **Suivi des performances** : Suivez vos progrès et vos statistiques en temps réel.
+- **Messagerie entre utilisateurs** : Communiquez avec d'autres utilisateurs pour partager des conseils ou planifier des séances d'entraînement.
+- **Découverte de partenaires** : Trouvez des partenaires d'entraînement compatibles dans votre région.
+
+---
+
+## Technologies Utilisées
+
+- Front-end : Svelte
+- Back-end : Node.js, Firebase
+- Mobile : Flutter
+
+---
+
+## Installation
+
+\```bash
+git clone https://github.com/HardstyIe/RenconSport_Flutter_Front.git
+cd RenconSport_Flutter_Front
+pub get
+\```
+
+---
+
+## Licence
+
+Ce projet est sous licence MIT - voir le fichier [LICENSE.md](LICENSE.md) pour plus de détails.
+
+---
+
+## Autheur
+
+- **Hardstyle** - _Développeur_ - [Hardstyle](https://github.com/HardstyIe)
+- **Frenchcode59** - _Développeur_ - [Frenchode59](https://github.com/frenchcode59)
+- **BenCDA** - _Développeur_ - [BenCDA](https://github.com/BenCDA)
+- **Othman59** - _Développeur_ - [Othman59](https://github.com/Othman59)
