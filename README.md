@@ -41,6 +41,8 @@ L'application de réseau de musculation RenconSport vise à offrir aux utilisate
 git clone https://github.com/HardstyIe/RenconSport_Flutter_Front.git
 cd RenconSport_Flutter_Front
 flutter pub get
+flutter run
+
 ```
 
 ---
