@@ -54,6 +54,6 @@ Ce projet est sous licence MIT - voir le fichier [LICENSE.md](LICENSE.md) pour p
 ## Autheur
 
 - **Duchemin Dylan** - _Développeur_ - [Hardstyle](https://github.com/HardstyIe)
-- **Denis Deroullers** - _Développeur_ - [Frenchode59](https://github.com/frenchcode59)
-- **Benjamin Cardoso D'Almeida** - _Développeur_ - [BenCDA](https://github.com/BenCDA)
-- **Othman Douz** - _Développeur_ - [Othman59](https://github.com/Othman59)
+- **Deroullers Denis** - _Développeur_ - [Frenchode59](https://github.com/frenchcode59)
+- **Cardoso D'Almeida Benjamin** - _Développeur_ - [BenCDA](https://github.com/BenCDA)
+- **Douz Othman** - _Développeur_ - [Othman59](https://github.com/Othman59)
