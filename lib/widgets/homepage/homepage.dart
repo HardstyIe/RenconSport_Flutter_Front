@@ -10,6 +10,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final _formKey = GlobalKey<FormState>();
+  bool isChecked = false; // Ajoutez une variable pour gérer l'état du Checkbox
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,7 @@ class _HomePageState extends State<HomePage> {
             height: 20,
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0), // Espacement des côtés
+            padding: EdgeInsets.symmetric(horizontal: 16.0),
             child: Center(
               widthFactor: MediaQuery.of(context).size.width,
               child: Text(
@@ -43,53 +44,16 @@ class _HomePageState extends State<HomePage> {
           SizedBox(
             height: 10,
           ),
-          Text("Votre nom : ",
-          style: Theme.of(context).textTheme.bodyLarge,
+          Text(
+            "Votre nom : ",
+            style: Theme.of(context).textTheme.bodyLarge,
           ),
           SizedBox(
             height: 15,
           ),
           Form(
-              key: _formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.7,
-                    decoration: BoxDecoration(
-                      color: CustomTheme.tertiaryColor,
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                    child: TextFormField(
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Veuillez remplir le champs";
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Duchemin',
-                        hintStyle: TextStyle(color: Colors.grey),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30.0),
-                          borderSide: BorderSide(
-                          color: Colors.green,
-                      ),
-                      ),
-                    ),
-                    ),
-                  ),
-                ],
-              ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Text("Votre prénom : "),
-          SizedBox(height: 15),
-
-          Form(
-              child: Column(
+            key: _formKey,
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
@@ -101,7 +65,44 @@ class _HomePageState extends State<HomePage> {
                   child: TextFormField(
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return "Veuillez remplir le champs";
+                        return "Veuillez remplir le champ";
+                      }
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                      hintText: 'Duchemin',
+                      hintStyle: TextStyle(color: Colors.grey),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                        borderSide: BorderSide(
+                          color: Colors.green,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Text("Votre prénom : "),
+          SizedBox(height: 15),
+          Form(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.7,
+                  decoration: BoxDecoration(
+                    color: CustomTheme.tertiaryColor,
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                  child: TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Veuillez remplir le champ";
                       }
                       return null;
                     },
@@ -138,7 +139,7 @@ class _HomePageState extends State<HomePage> {
                   child: TextFormField(
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return "Veuillez remplir le champs";
+                        return "Veuillez remplir le champ";
                       }
                       return null;
                     },
@@ -175,7 +176,7 @@ class _HomePageState extends State<HomePage> {
                   child: TextFormField(
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return "Veuillez remplir le champs";
+                        return "Veuillez remplir le champ";
                       }
                       return null;
                     },
@@ -212,7 +213,7 @@ class _HomePageState extends State<HomePage> {
                   child: TextFormField(
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return "Veuillez remplir le champs";
+                        return "Veuillez remplir le champ";
                       }
                       return null;
                     },
@@ -226,6 +227,31 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Row(
+              children: [
+                Checkbox(
+                  value: isChecked,
+                  onChanged: (bool? value) {
+                    setState(() {
+                      isChecked = value!;
+                    });
+                  },
+                ),
+                Text(
+                  'Accepter les conditions générales d\'utilisation',
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    color: Colors.black,
                   ),
                 ),
               ],
