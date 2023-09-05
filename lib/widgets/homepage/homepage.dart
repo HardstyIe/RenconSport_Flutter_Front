@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:renconsport/services/theme.dart';
+import 'dart:convert';
+import 'package:crypto/crypto.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -10,7 +12,22 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final _formKey = GlobalKey<FormState>();
-  bool isChecked = false; // Ajoutez une variable pour gérer l'état du Checkbox
+  bool isChecked = false;
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    firstNameController.dispose();
+    emailController.dispose();
+    phoneController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +80,7 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: BorderRadius.circular(30.0),
                   ),
                   child: TextFormField(
+                    controller: nameController, // Associez le contrôleur au champ de texte
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "Veuillez remplir le champ";
@@ -100,6 +118,7 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: BorderRadius.circular(30.0),
                   ),
                   child: TextFormField(
+                    controller: firstNameController, // Associez le contrôleur au champ de texte
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "Veuillez remplir le champ";
@@ -137,6 +156,7 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: BorderRadius.circular(30.0),
                   ),
                   child: TextFormField(
+                    controller: emailController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "Veuillez remplir le champ";
@@ -174,6 +194,7 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: BorderRadius.circular(30.0),
                   ),
                   child: TextFormField(
+                    controller: phoneController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "Veuillez remplir le champ";
@@ -211,6 +232,8 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: BorderRadius.circular(30.0),
                   ),
                   child: TextFormField(
+                    controller: passwordController,
+                    obscureText: true, // Pour masquer le mot de passe
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "Veuillez remplir le champ";
@@ -218,7 +241,7 @@ class _HomePageState extends State<HomePage> {
                       return null;
                     },
                     decoration: InputDecoration(
-                      hintText: 'Denis',
+                      hintText: 'Mot de passe',
                       hintStyle: TextStyle(color: Colors.grey),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30.0),
@@ -257,8 +280,33 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
+          ElevatedButton(
+            onPressed: () {
+              activate();
+            },
+            child: Text("Inscription"),
+          ),
         ],
       ),
     );
+  }
+
+  void activate() {
+    if (_formKey.currentState!.validate()) {
+      String name = nameController.text;
+      String firstName = firstNameController.text;
+      String email = emailController.text;
+      String phone = phoneController.text;
+      String password = passwordController.text;
+
+      print("Nom: $name");
+      print("Prénom: $firstName");
+      print("Email: $email");
+      print("Téléphone: $phone");
+      print("Mot de passe: $password");
+      print("Conditions générales d'utilisation acceptées: $isChecked");
+
+      // Code d'envoi au serveur
+    }
   }
 }
