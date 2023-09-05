@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:renconsport/services/theme.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -26,14 +27,14 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           SizedBox(
-            height: 20, // Espace entre le titre et le texte principal
+            height: 20,
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.0), // Espacement des côtés
             child: Center(
               widthFactor: MediaQuery.of(context).size.width,
               child: Text(
-                'Rejoignez notre communauté passionnée de sport et faites des rencontres dès maintenant ! Laissez-nous être votre partenaire pour vivre des aventures sportives inoubliables tout en faisant des rencontres enrichissantes ! ',
+                'Laissez-nous être votre partenaire pour vivre des aventures sportives inoubliables tout en faisant des rencontres enrichissantes ! ',
                 style: Theme.of(context).textTheme.bodyLarge,
                 textAlign: TextAlign.center,
               ),
@@ -53,7 +54,51 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TextFormField(
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.7,
+                    decoration: BoxDecoration(
+                      color: CustomTheme.tertiaryColor,
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Veuillez remplir le champs";
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        hintText: 'Duchemin',
+                        hintStyle: TextStyle(color: Colors.grey),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                          borderSide: BorderSide(
+                          color: Colors.green,
+                      ),
+                      ),
+                    ),
+                    ),
+                  ),
+                ],
+              ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Text("Votre prénom : "),
+          SizedBox(height: 15),
+
+          Form(
+              child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.7,
+                  decoration: BoxDecoration(
+                    color: CustomTheme.tertiaryColor,
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                  child: TextFormField(
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "Veuillez remplir le champs";
@@ -61,18 +106,130 @@ class _HomePageState extends State<HomePage> {
                       return null;
                     },
                     decoration: InputDecoration(
-                      hintText: 'Benjamin',
+                      hintText: 'Denis',
                       hintStyle: TextStyle(color: Colors.grey),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30.0),
                         borderSide: BorderSide(
-                        color: Colors.green,
-                    ),
+                          color: Colors.green,
+                        ),
+                      ),
                     ),
                   ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Text("Votre email : "),
+          SizedBox(height: 15),
+          Form(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.7,
+                  decoration: BoxDecoration(
+                    color: CustomTheme.tertiaryColor,
+                    borderRadius: BorderRadius.circular(30.0),
                   ),
-                ],
-              ),
+                  child: TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Veuillez remplir le champs";
+                      }
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                      hintText: 'email@boite.fr',
+                      hintStyle: TextStyle(color: Colors.grey),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                        borderSide: BorderSide(
+                          color: Colors.green,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Text("Votre numéro de téléphone : "),
+          SizedBox(height: 15),
+          Form(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.7,
+                  decoration: BoxDecoration(
+                    color: CustomTheme.tertiaryColor,
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                  child: TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Veuillez remplir le champs";
+                      }
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                      hintText: '01 23 45 67 89',
+                      hintStyle: TextStyle(color: Colors.grey),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                        borderSide: BorderSide(
+                          color: Colors.green,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Text("Votre mot de passe : "),
+          SizedBox(height: 15),
+          Form(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.7,
+                  decoration: BoxDecoration(
+                    color: CustomTheme.tertiaryColor,
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                  child: TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Veuillez remplir le champs";
+                      }
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                      hintText: 'Denis',
+                      hintStyle: TextStyle(color: Colors.grey),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                        borderSide: BorderSide(
+                          color: Colors.green,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
