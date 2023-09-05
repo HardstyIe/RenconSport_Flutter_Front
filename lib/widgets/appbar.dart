@@ -7,8 +7,17 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Color(0xFF7FAAC8),
-      title: Text("RenconSport"),
+      backgroundColor: Theme.of(context).primaryColor,
+      title: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Image.asset('assets/LogoGood.png',
+            width: 164,
+            height: 160,
+          ),
+        ],
+      ),
     );
   }
 }

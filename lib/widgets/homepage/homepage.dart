@@ -14,7 +14,7 @@ class _HomePageState extends State<HomePage> {
         body: Center(
           child: Text(
             'Hello, world!',
-            style: Theme.of(context).textTheme.headline4,
+            style: Theme.of(context).textTheme.bodyLarge,
           ),
         ),
     );
