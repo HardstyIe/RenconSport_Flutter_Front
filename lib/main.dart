@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:renconsport/services/theme.dart';
 import 'package:renconsport/widgets/homepage/homepage.dart';
 import 'package:renconsport/widgets/appbar.dart';
 
@@ -14,13 +15,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
+        theme:  CustomTheme.defaultTheme,
         home: Scaffold(
           body: HomePage(),
           appBar: CustomAppBar(),
+
         ),
 
 
