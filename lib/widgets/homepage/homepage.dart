@@ -233,7 +233,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   child: TextFormField(
                     controller: passwordController,
-                    obscureText: true, // Pour masquer le mot de passe
+                    obscureText: true,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "Veuillez remplir le champ";
@@ -254,9 +254,6 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-          ),
-          SizedBox(
-            height: 10,
           ),
           Padding(
             padding: const EdgeInsets.all(10.0),
@@ -285,11 +282,25 @@ class _HomePageState extends State<HomePage> {
               activate();
             },
             child: Text("Inscription"),
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+            ),
           ),
-        ],
-      ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Center(
+              child:
+                Text("Vous avez déjà un compte ? Connecter vous !"
+                ),
+            ),
+          ),
+    ],
+    ),
     );
   }
+
 
   void activate() {
     if (_formKey.currentState!.validate()) {
