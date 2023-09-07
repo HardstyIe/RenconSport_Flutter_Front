@@ -1,13 +1,23 @@
 import 'package:dio/dio.dart';
-import 'package:renconsport/widgets/homepage/homepage.dart';
+import 'package:renconsport/models/user.dart';
 
 class InscriptionService {
   static const url = "http://localhost:3000/auth/register";
-  static final Dio  _dio = Dio();
+  static final Dio _dio = Dio();
 
-  static Future<HomePage> getRegister() async {
-      final response = await _dio.get(url);
-      print(response);
-      // return ??? ;
+  static Future<User?> registerUser(Map<String, dynamic> userData) async {
+    try {
+      final response = await _dio.post(url, data: userData);
+
+      if (response.statusCode == 200) {
+        final userDataJson = response.data as Map<String, dynamic>;
+        final user = User.fromJson(userDataJson);
+        return user;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return null;
+    }
   }
 }

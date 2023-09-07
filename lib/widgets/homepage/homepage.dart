@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:renconsport/services/theme.dart';
-import 'dart:convert';
-import 'package:crypto/crypto.dart';
+import 'package:dio/dio.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,16 +12,16 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final _formKey = GlobalKey<FormState>();
   bool isChecked = false;
-  final TextEditingController nameController = TextEditingController();
   final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   @override
   void dispose() {
-    nameController.dispose();
     firstNameController.dispose();
+    lastNameController.dispose();
     emailController.dispose();
     phoneController.dispose();
     passwordController.dispose();
@@ -40,7 +39,7 @@ class _HomePageState extends State<HomePage> {
           ),
           Center(
             child: Text(
-              'Inscrivez vous!',
+              'Inscrivez-vous!',
               style: Theme.of(context).textTheme.titleLarge,
             ),
           ),
@@ -61,13 +60,8 @@ class _HomePageState extends State<HomePage> {
           SizedBox(
             height: 10,
           ),
-          Text(
-            "Votre nom : ",
-            style: Theme.of(context).textTheme.bodyLarge,
-          ),
-          SizedBox(
-            height: 15,
-          ),
+          Text("Votre prénom : "),
+          SizedBox(height: 15),
           Form(
             key: _formKey,
             child: Column(
@@ -80,7 +74,7 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: BorderRadius.circular(30.0),
                   ),
                   child: TextFormField(
-                    controller: nameController, // Associez le contrôleur au champ de texte
+                    controller: firstNameController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "Veuillez remplir le champ";
@@ -88,7 +82,7 @@ class _HomePageState extends State<HomePage> {
                       return null;
                     },
                     decoration: InputDecoration(
-                      hintText: 'Duchemin',
+                      hintText: 'Denis',
                       hintStyle: TextStyle(color: Colors.grey),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30.0),
@@ -105,7 +99,7 @@ class _HomePageState extends State<HomePage> {
           SizedBox(
             height: 10,
           ),
-          Text("Votre prénom : "),
+          Text("Votre nom de famille : "),
           SizedBox(height: 15),
           Form(
             child: Column(
@@ -118,7 +112,7 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: BorderRadius.circular(30.0),
                   ),
                   child: TextFormField(
-                    controller: firstNameController, // Associez le contrôleur au champ de texte
+                    controller: lastNameController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "Veuillez remplir le champ";
@@ -126,7 +120,7 @@ class _HomePageState extends State<HomePage> {
                       return null;
                     },
                     decoration: InputDecoration(
-                      hintText: 'Denis',
+                      hintText: 'Votre nom de famille',
                       hintStyle: TextStyle(color: Colors.grey),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30.0),
@@ -255,6 +249,9 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
+          SizedBox(
+            height: 10,
+          ),
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Row(
@@ -291,33 +288,43 @@ class _HomePageState extends State<HomePage> {
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Center(
-              child:
-                Text("Vous avez déjà un compte ? Connecter vous !"
-                ),
+              child: Text("Vous avez déjà un compte ? Connectez-vous !"),
             ),
           ),
-    ],
-    ),
+        ],
+      ),
     );
   }
 
+  Future<void> sendRegistrationData() async {
+    try {
+      final Dio dio = Dio();
+      final Map<String, dynamic> userData = {
+        'first_name': firstNameController.text,
+        'last_name': lastNameController.text,
+        'email': emailController.text,
+        'phone': phoneController.text,
+        'password': passwordController.text,
+      };
+
+      final Response response = await dio.post(
+        'http://localhost:3000/auth/register',
+        data: userData,
+      );
+
+      if (response.statusCode == 200) {
+        print('Inscription réussie');
+      } else {
+        print('Échec de l\'inscription');
+      }
+    } catch (error) {
+      print('Erreur inattendue: $error');
+    }
+  }
 
   void activate() {
     if (_formKey.currentState!.validate()) {
-      String name = nameController.text;
-      String firstName = firstNameController.text;
-      String email = emailController.text;
-      String phone = phoneController.text;
-      String password = passwordController.text;
-
-      print("Nom: $name");
-      print("Prénom: $firstName");
-      print("Email: $email");
-      print("Téléphone: $phone");
-      print("Mot de passe: $password");
-      print("Conditions générales d'utilisation acceptées: $isChecked");
-
-      // Code d'envoi au serveur
+      sendRegistrationData();
     }
   }
 }
