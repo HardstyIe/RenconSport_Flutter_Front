@@ -1,9 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:renconsport/services/theme.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -15,284 +14,136 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
-  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController dateOfBirthController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  DateTime selectedDate = DateTime.now();
 
   @override
   void dispose() {
     firstNameController.dispose();
     lastNameController.dispose();
     emailController.dispose();
-    phoneController.dispose();
+    dateOfBirthController.dispose();
     passwordController.dispose();
     super.dispose();
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+    );
+    if (picked != null && picked != selectedDate)
+      setState(() {
+        selectedDate = picked;
+        dateOfBirthController.text = "${selectedDate.toLocal()}".split(' ')[0];
+      });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(
-            height: 30,
-          ),
-          Center(
-            child: Text(
-              'Inscrivez-vous!',
-              style: Theme.of(context).textTheme.titleLarge,
+      body: Form(
+        key: _formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(height: 30),
+            Center(
+              child: Text('Inscrivez-vous!', style: TextStyle(fontSize: 24)),
             ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0),
-            child: Center(
-              widthFactor: MediaQuery.of(context).size.width,
+            SizedBox(height: 20),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
-                'Laissez-nous être votre partenaire pour vivre des aventures sportives inoubliables tout en faisant des rencontres enrichissantes ! ',
-                style: Theme.of(context).textTheme.bodyLarge,
+                'Laissez-nous être votre partenaire pour vivre des aventures sportives inoubliables tout en faisant des rencontres enrichissantes !',
                 textAlign: TextAlign.center,
               ),
             ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Text("Votre prénom : "),
-          SizedBox(height: 15),
-          Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.7,
-                  decoration: BoxDecoration(
-                    color: CustomTheme.tertiaryColor,
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                  child: TextFormField(
-                    controller: firstNameController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Veuillez remplir le champ";
-                      }
-                      return null;
+            buildTextField('Votre prénom : ', 'Prenom', firstNameController),
+            buildTextField('Votre nom de famille : ', 'Nom de famille',
+                lastNameController),
+            buildTextField(
+                'Votre email : ', 'email@exemple.com', emailController),
+            buildTextField('Votre date de naissance : ', 'JJ/MM/AAAA',
+                dateOfBirthController,
+                isDateField: true),
+            buildTextField(
+                'Votre mot de passe : ', 'Mot de passe', passwordController),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Row(
+                children: [
+                  Checkbox(
+                    value: isChecked,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        isChecked = value!;
+                      });
                     },
-                    decoration: InputDecoration(
-                      hintText: 'Denis',
-                      hintStyle: TextStyle(color: Colors.grey),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                        borderSide: BorderSide(
-                          color: Colors.green,
-                        ),
-                      ),
+                  ),
+                  Text('Accepter les conditions générales d\'utilisation'),
+                ],
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                if (_formKey.currentState!.validate() && isChecked) {
+                  await sendRegistrationData();
+                  // Ici, ajoutez la logique pour rediriger vers /login ou afficher une Snackbar
+                }
+              },
+              child: Text("Inscription"),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildTextField(
+      String label, String hint, TextEditingController controller,
+      {bool isDateField = false}) {
+    return Column(
+      children: [
+        Text(label),
+        SizedBox(height: 15),
+        GestureDetector(
+          onTap: isDateField ? () => _selectDate(context) : null,
+          child: AbsorbPointer(
+            absorbing: isDateField,
+            child: Container(
+              width: MediaQuery.of(context).size.width * 0.7,
+              decoration: BoxDecoration(
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+              child: TextFormField(
+                controller: controller,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Veuillez remplir ce champ";
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                  hintText: hint,
+                  hintStyle: TextStyle(color: Colors.grey),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                    borderSide: BorderSide(
+                      color: Colors.green,
                     ),
                   ),
                 ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Text("Votre nom de famille : "),
-          SizedBox(height: 15),
-          Form(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.7,
-                  decoration: BoxDecoration(
-                    color: CustomTheme.tertiaryColor,
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                  child: TextFormField(
-                    controller: lastNameController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Veuillez remplir le champ";
-                      }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                      hintText: 'Votre nom de famille',
-                      hintStyle: TextStyle(color: Colors.grey),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                        borderSide: BorderSide(
-                          color: Colors.green,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Text("Votre email : "),
-          SizedBox(height: 15),
-          Form(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.7,
-                  decoration: BoxDecoration(
-                    color: CustomTheme.tertiaryColor,
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                  child: TextFormField(
-                    controller: emailController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Veuillez remplir le champ";
-                      }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                      hintText: 'email@boite.fr',
-                      hintStyle: TextStyle(color: Colors.grey),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                        borderSide: BorderSide(
-                          color: Colors.green,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Text("Votre numéro de téléphone : "),
-          SizedBox(height: 15),
-          Form(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.7,
-                  decoration: BoxDecoration(
-                    color: CustomTheme.tertiaryColor,
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                  child: TextFormField(
-                    controller: phoneController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Veuillez remplir le champ";
-                      }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                      hintText: '01 23 45 67 89',
-                      hintStyle: TextStyle(color: Colors.grey),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                        borderSide: BorderSide(
-                          color: Colors.green,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Text("Votre mot de passe : "),
-          SizedBox(height: 15),
-          Form(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.7,
-                  decoration: BoxDecoration(
-                    color: CustomTheme.tertiaryColor,
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                  child: TextFormField(
-                    controller: passwordController,
-                    obscureText: true,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Veuillez remplir le champ";
-                      }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                      hintText: 'Mot de passe',
-                      hintStyle: TextStyle(color: Colors.grey),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                        borderSide: BorderSide(
-                          color: Colors.green,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              children: [
-                Checkbox(
-                  value: isChecked,
-                  onChanged: (bool? value) {
-                    setState(() {
-                      isChecked = value!;
-                    });
-                  },
-                ),
-                Text(
-                  'Accepter les conditions générales d\'utilisation',
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    color: Colors.black,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              activate();
-            },
-            child: Text("Inscription"),
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0),
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Center(
-              child: Text("Vous avez déjà un compte ? Connectez-vous !"),
-            ),
-          ),
-        ],
-      ),
+        ),
+        SizedBox(height: 10),
+      ],
     );
   }
 
@@ -303,7 +154,8 @@ class _HomePageState extends State<HomePage> {
         'first_name': firstNameController.text,
         'last_name': lastNameController.text,
         'email': emailController.text,
-        'phone': phoneController.text,
+        'birthday': selectedDate.millisecondsSinceEpoch ~/
+            1000, // Convertir en secondes
         'password': passwordController.text,
       };
 
@@ -313,19 +165,26 @@ class _HomePageState extends State<HomePage> {
       );
 
       if (response.statusCode == 200) {
-        print('Inscription réussie');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Inscription réussie'),
+          ),
+        );
+        // Redirection vers la page /login
+        Navigator.pushNamed(context, '/login');
       } else {
-        print('Échec de l\'inscription');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Échec de l\'inscription'),
+          ),
+        );
       }
     } catch (error) {
-      print('Erreur inattendue: $error');
-    }
-  }
-
-  void activate() {
-    super.activate();
-    if (_formKey.currentState!.validate()) {
-      sendRegistrationData();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Erreur inattendue: $error'),
+        ),
+      );
     }
   }
 }
