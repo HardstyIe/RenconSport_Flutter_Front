@@ -323,6 +323,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void activate() {
+    super.activate();
     if (_formKey.currentState!.validate()) {
       sendRegistrationData();
     }
