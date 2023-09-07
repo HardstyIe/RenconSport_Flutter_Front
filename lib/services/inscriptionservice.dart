@@ -6,6 +6,8 @@ class InscriptionService {
   static final Dio  _dio = Dio();
 
   static Future<HomePage> getRegister() async {
-
+      final response = await _dio.get(url);
+      print(response);
+      // return ??? ;
   }
 }

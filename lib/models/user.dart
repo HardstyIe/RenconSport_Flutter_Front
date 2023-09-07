@@ -3,15 +3,15 @@ import 'dart:ffi';
 class User {
   final String user_id;
   final String email;
-  final String firstName;
-  final String lastName;
+  final String first_name;
+  final String last_name;
   final String password;
   final Int birthday;
   final String location;
   final String phone;
 
-  User(this.user_id, this.email, this.firstName,
-      this.lastName, this.password, this.birthday,
+  User(this.user_id, this.email, this.first_name,
+      this.last_name, this.password, this.birthday,
       this.location, this.phone);
 
 
@@ -20,8 +20,8 @@ class User {
   User.fromJson(Map<String, dynamic> json):
         user_id = json["id"],
         email = json["email"],
-        firstName = json["firstName"],
-        lastName = json["lastName"],
+        first_name = json["first_name"],
+        last_name = json["last_name"],
         password = json["password"],
         birthday = json["birthday"],
         location = json["location"],
