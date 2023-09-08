@@ -68,12 +68,12 @@ class _HomePageState extends State<HomePage> {
             buildTextField('Votre nom de famille : ', 'Nom de famille',
                 lastNameController),
             buildTextField(
-                'Votre email : ', 'email@exemple.com', emailController, backgroundColor: CustomTheme.tertiaryColor),
+                'Votre email : ', 'email@exemple.com', emailController,),
             buildTextField('Votre date de naissance : ', 'JJ/MM/AAAA',
                 dateOfBirthController,
                 isDateField: true),
             buildTextField(
-                'Votre mot de passe : ', 'Mot de passe', passwordController, backgroundColor: CustomTheme.tertiaryColor),
+                'Votre mot de passe : ', 'Mot de passe', passwordController,),
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Row(
@@ -107,7 +107,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget buildTextField(
       String label, String hint, TextEditingController controller,
-      {bool isDateField = false, Color? backgroundColor}) {
+      {bool isDateField = false}) {
     return Column(
       children: [
         Text(label),
@@ -130,8 +130,11 @@ class _HomePageState extends State<HomePage> {
                   }
                   return null;
                 },
+
                 decoration: InputDecoration(
                   hintText: hint,
+                  fillColor: CustomTheme.tertiaryColor,
+                  filled: true,
                   hintStyle: TextStyle(color: Colors.grey),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30.0),
