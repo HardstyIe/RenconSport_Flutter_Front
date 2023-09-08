@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:renconsport/widgets/homepage/filtre.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -12,10 +12,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
-      child: Text(
-        'Hello, world!',
-        style: Theme.of(context).textTheme.headline4,
+      child:  FilterApp()
       ),
-    ));
+    )
+    ;
   }
 }
