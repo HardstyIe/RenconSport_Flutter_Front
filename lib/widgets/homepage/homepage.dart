@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:renconsport/services/theme.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -66,12 +68,12 @@ class _HomePageState extends State<HomePage> {
             buildTextField('Votre nom de famille : ', 'Nom de famille',
                 lastNameController),
             buildTextField(
-                'Votre email : ', 'email@exemple.com', emailController),
+                'Votre email : ', 'email@exemple.com', emailController, backgroundColor: CustomTheme.tertiaryColor),
             buildTextField('Votre date de naissance : ', 'JJ/MM/AAAA',
                 dateOfBirthController,
                 isDateField: true),
             buildTextField(
-                'Votre mot de passe : ', 'Mot de passe', passwordController),
+                'Votre mot de passe : ', 'Mot de passe', passwordController, backgroundColor: CustomTheme.tertiaryColor),
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Row(
@@ -105,7 +107,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget buildTextField(
       String label, String hint, TextEditingController controller,
-      {bool isDateField = false}) {
+      {bool isDateField = false, Color? backgroundColor}) {
     return Column(
       children: [
         Text(label),
@@ -155,7 +157,7 @@ class _HomePageState extends State<HomePage> {
         'last_name': lastNameController.text,
         'email': emailController.text,
         'birthday': selectedDate.millisecondsSinceEpoch ~/
-            1000, // Convertir en secondes
+            1000,
         'password': passwordController.text,
       };
 
@@ -170,7 +172,6 @@ class _HomePageState extends State<HomePage> {
             content: Text('Inscription réussie'),
           ),
         );
-        // Redirection vers la page /login
         Navigator.pushNamed(context, '/login');
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
