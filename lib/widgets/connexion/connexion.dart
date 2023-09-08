@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:renconsport/services/theme.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -75,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
             obscureText: label.contains("Mot de passe"), // Masquer le mot de passe
             decoration: InputDecoration(
               hintText: hint,
-              fillColor: Colors.grey[300],
+              fillColor: CustomTheme.tertiaryColor,
               filled: true,
               hintStyle: TextStyle(color: Colors.grey),
               border: OutlineInputBorder(
@@ -104,6 +105,8 @@ class _LoginPageState extends State<LoginPage> {
 
       if (response.statusCode == 200) {
         // Connexion réussie, ajoutez ici la logique pour rediriger vers la page d'accueil
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("Connexion réussie")));
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
