@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:renconsport/services/theme.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -25,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Connexion'),
+
       ),
       body: Form(
         key: _formKey,
@@ -73,7 +72,7 @@ class _LoginPageState extends State<LoginPage> {
               }
               return null;
             },
-            obscureText: label.contains("Mot de passe"), 
+            obscureText: label.contains("Mot de passe"), // Masquer le mot de passe
             decoration: InputDecoration(
               hintText: hint,
               fillColor: Colors.grey[300],
