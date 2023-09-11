@@ -97,6 +97,8 @@ class _HomePageState extends State<HomePage> {
                 onPressed: () async {
                   if (_formKey.currentState!.validate() && isChecked) {
                     await sendRegistrationData();
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => LoginPage()));
                     // Ici, ajoutez la logique pour rediriger vers /login ou afficher une Snackbar
                   }
                 },
