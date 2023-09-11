@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:renconsport/models/user.dart';
 
-class InscriptionService {
+class RegisterService {
   static const url = "http://localhost:3000/auth/register";
   static final Dio _dio = Dio();
 
