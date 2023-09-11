@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:renconsport/screens/connexion/connexion.dart';
 import 'package:renconsport/services/theme.dart';
 
 class HomePage extends StatefulWidget {
@@ -58,17 +59,24 @@ class _HomePageState extends State<HomePage> {
               ),
               SizedBox(height: 20),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.1),
+                padding: EdgeInsets.symmetric(
+                    horizontal: MediaQuery.of(context).size.width * 0.1),
                 child: Text(
                   'Laissez-nous être votre partenaire pour vivre des aventures sportives inoubliables tout en faisant des rencontres enrichissantes !',
                   textAlign: TextAlign.center,
                 ),
               ),
               buildTextField('Votre prénom : ', 'Prenom', firstNameController),
-              buildTextField('Votre nom de famille : ', 'Nom de famille', lastNameController),
-              buildTextField('Votre email : ', 'email@exemple.com', emailController),
-              buildTextField('Votre date de naissance : ', 'JJ/MM/AAAA', dateOfBirthController, isDateField: true),
-              buildTextField('Votre mot de passe : ', 'Mot de passe', passwordController, obscureText: true),
+              buildTextField('Votre nom de famille : ', 'Nom de famille',
+                  lastNameController),
+              buildTextField(
+                  'Votre email : ', 'email@exemple.com', emailController),
+              buildTextField('Votre date de naissance : ', 'JJ/MM/AAAA',
+                  dateOfBirthController,
+                  isDateField: true),
+              buildTextField(
+                  'Votre mot de passe : ', 'Mot de passe', passwordController,
+                  obscureText: true),
               Padding(
                 padding: EdgeInsets.all(10.0),
                 child: Row(
@@ -101,7 +109,9 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget buildTextField(String label, String hint, TextEditingController controller, {bool isDateField = false, bool obscureText = false}) {
+  Widget buildTextField(
+      String label, String hint, TextEditingController controller,
+      {bool isDateField = false, bool obscureText = false}) {
     return Column(
       children: [
         Text(label),
@@ -168,7 +178,8 @@ class _HomePageState extends State<HomePage> {
             content: Text('Inscription réussie'),
           ),
         );
-        Navigator.pushNamed(context, '/login');
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => LoginPage()));
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
