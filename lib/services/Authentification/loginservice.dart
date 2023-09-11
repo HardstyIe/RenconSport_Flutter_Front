@@ -1,6 +1,6 @@
 import 'package:renconsport/models/user.dart';
 import 'package:dio/dio.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginService {
   static const url = "http://localhost:3000/auth/login";
