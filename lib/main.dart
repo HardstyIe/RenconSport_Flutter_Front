@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
 
 
   @override
+
   Widget build(BuildContext context) {
 
     return MaterialApp(
@@ -26,3 +27,5 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+// Initialize App for email register with Firebase
+final Future<FirebaseApp> _initialization = Firebase.initializeApp();
