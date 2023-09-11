@@ -107,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
         // Connexion réussie, ajoutez ici la logique pour rediriger vers la page d'accueil
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text("Connexion réussie")));
-        Navigator.pushNamed(context, '/homepage');git
+        Navigator.pushNamed(context, '/homepage');
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
