@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme:  CustomTheme.defaultTheme,
         home: Scaffold(
-          body: Home(),
+          body: BottomAppBar(),
           appBar: CustomAppBar(),
         ),
 
