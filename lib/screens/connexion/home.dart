@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:renconsport/widgets/appbar.dart';
+import 'package:renconsport/services/theme.dart';
+import 'package:renconsport/widgets/bottomappbar.dart';
+
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -30,11 +33,11 @@ class _HomeState extends State<Home> {
                   onPressed: () {},
                 ),
                 IconButton(
-                    padding: EdgeInsets.only(top: 20),
-                    icon: Icon(Icons.arrow_drop_down),
-                    iconSize: 70,
-                    onPressed: () {},
-                  ),
+                  padding: EdgeInsets.only(top: 20),
+                  icon: Icon(Icons.arrow_drop_down),
+                  iconSize: 70,
+                  onPressed: () {},
+                ),
                 IconButton(
                   icon: Icon(Icons.thumb_up_alt_sharp),
                   iconSize: 50,
@@ -43,7 +46,6 @@ class _HomeState extends State<Home> {
                 ),
               ],
             ),
-            
           ],
         ),
       ),

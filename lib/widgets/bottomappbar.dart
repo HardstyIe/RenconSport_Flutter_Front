@@ -1,16 +1,36 @@
 import 'package:flutter/material.dart';
 
-class BottomAppBar extends StatefulWidget {
-  const BottomAppBar({super.key});
+class CustomBottomNavigationBar extends StatelessWidget implements PreferredSizeWidget {
+  const CustomBottomNavigationBar({super.key});
 
   @override
-  State<BottomAppBar> createState() => _BottomAppBarState();
-}
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
 
-class _BottomAppBarState extends State<BottomAppBar> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
+      backgroundColor: Theme.of(context).primaryColor,
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
+      items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+                    icon: Icon(Icons.home),
+                    label: '',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.account_circle),
+                    label: '',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.message),
+                    label: '',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.fitness_center),
+                    label: '',
+                  ),
+      ]    
     );
   }
 }
