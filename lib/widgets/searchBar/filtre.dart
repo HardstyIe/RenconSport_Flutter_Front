@@ -239,7 +239,7 @@ class FilterList extends StatelessWidget {
 
   FilterList({required this.sports});
 
-  @overrider
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
