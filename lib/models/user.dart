@@ -10,15 +10,11 @@ class User {
   final String location;
   final String phone;
 
-  User(this.user_id, this.email, this.first_name,
-      this.last_name, this.password, this.birthday,
-      this.location, this.phone);
+  User(this.user_id, this.email, this.first_name, this.last_name, this.password,
+      this.birthday, this.location, this.phone);
 
-
-
-
-  User.fromJson(Map<String, dynamic> json):
-        user_id = json["id"],
+  User.fromJson(Map<String, dynamic> json)
+      : user_id = json["id"],
         email = json["email"],
         first_name = json["first_name"],
         last_name = json["last_name"],
@@ -26,5 +22,4 @@ class User {
         birthday = json["birthday"],
         location = json["location"],
         phone = json["phone"];
-
 }

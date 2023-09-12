@@ -52,7 +52,7 @@
         <string>None</string>
         <key>CFBundleURLSchemes</key>
         <array>
-            <string>com.example.renconsport</string>
+            <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
         </array>
     </dict>
 </array>
