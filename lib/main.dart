@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:renconsport/screens/connexion/home.dart';
-import 'package:renconsport/screens/connexion/profilepage.dart';
 import 'package:renconsport/services/theme.dart';
 import 'package:renconsport/widgets/homepage/homepage.dart';
 import 'package:renconsport/widgets/appbar.dart';
