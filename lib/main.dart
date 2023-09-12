@@ -4,10 +4,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:renconsport/screens/connexion/login_view.dart';
 
 import '/models/controllers/auth0/auth0_controller.dart';
-import '/views/login/login_view.dart';
-import '/views/login/profile_view.dart';
 
 const appScheme = 'HTTPS';
 
@@ -50,8 +49,8 @@ class MyApp extends HookConsumerWidget {
           child: auth0State.isBusy
               ? const CircularProgressIndicator()
               : auth0State.isLoggedIn
-                  ? const ProfileView()
-                  : const LoginView(),
+                  ? LoginView()
+                  : LoginView(),
         ),
       ),
     );

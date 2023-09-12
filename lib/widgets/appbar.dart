@@ -12,7 +12,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset('assets/LogoGood.png',
+          Image.asset(
+            'assets/LogoGood.png',
             width: 164,
             height: 160,
           ),
