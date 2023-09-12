@@ -23,7 +23,6 @@ if (flutterVersionName == null) {
 }
 
 android {
-    namespace "com.example.renconsport"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
@@ -46,6 +45,7 @@ android {
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdkVersion flutter.minSdkVersion
+manifestPlaceholders += [auth0Domain: "dev-rsb7ct14ymtfm6w1.eu.auth0.com", auth0Scheme: "HTTPS"]
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
