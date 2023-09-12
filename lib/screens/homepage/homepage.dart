@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:renconsport/screens/connexion/connexion.dart';
+import 'package:renconsport/services/theme.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -45,59 +47,63 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Form(
-        key: _formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(height: 30),
-            Center(
-              child: Text('Inscrivez-vous!', style: TextStyle(fontSize: 24)),
-            ),
-            SizedBox(height: 20),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text(
-                'Laissez-nous être votre partenaire pour vivre des aventures sportives inoubliables tout en faisant des rencontres enrichissantes !',
-                textAlign: TextAlign.center,
+      body: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(height: 30),
+              Center(
+                child: Text('Inscrivez-vous!', style: TextStyle(fontSize: 24)),
               ),
-            ),
-            buildTextField('Votre prénom : ', 'Prenom', firstNameController),
-            buildTextField('Votre nom de famille : ', 'Nom de famille',
-                lastNameController),
-            buildTextField(
-                'Votre email : ', 'email@exemple.com', emailController),
-            buildTextField('Votre date de naissance : ', 'JJ/MM/AAAA',
-                dateOfBirthController,
-                isDateField: true),
-            buildTextField(
-                'Votre mot de passe : ', 'Mot de passe', passwordController),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Row(
-                children: [
-                  Checkbox(
-                    value: isChecked,
-                    onChanged: (bool? value) {
-                      setState(() {
-                        isChecked = value!;
-                      });
-                    },
-                  ),
-                  Text('Accepter les conditions générales d\'utilisation'),
-                ],
+              SizedBox(height: 20),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: MediaQuery.of(context).size.width * 0.1),
+                child: Text(
+                  'Laissez-nous être votre partenaire pour vivre des aventures sportives inoubliables tout en faisant des rencontres enrichissantes !',
+                  textAlign: TextAlign.center,
+                ),
               ),
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                if (_formKey.currentState!.validate() && isChecked) {
-                  await sendRegistrationData();
-                  // Ici, ajoutez la logique pour rediriger vers /login ou afficher une Snackbar
-                }
-              },
-              child: Text("Inscription"),
-            ),
-          ],
+              buildTextField('Votre prénom : ', 'Prenom', firstNameController),
+              buildTextField('Votre nom de famille : ', 'Nom de famille',
+                  lastNameController),
+              buildTextField(
+                  'Votre email : ', 'email@exemple.com', emailController),
+              buildTextField('Votre date de naissance : ', 'JJ/MM/AAAA',
+                  dateOfBirthController,
+                  isDateField: true),
+              buildTextField(
+                  'Votre mot de passe : ', 'Mot de passe', passwordController,
+                  obscureText: true),
+              Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Row(
+                  children: [
+                    Checkbox(
+                      value: isChecked,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          isChecked = value!;
+                        });
+                      },
+                    ),
+                    Text('Accepter les conditions générales d\'utilisation'),
+                  ],
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  if (_formKey.currentState!.validate() && isChecked) {
+                    await sendRegistrationData();
+                    // Ici, ajoutez la logique pour rediriger vers /login ou afficher une Snackbar
+                  }
+                },
+                child: Text("Inscription"),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -105,7 +111,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget buildTextField(
       String label, String hint, TextEditingController controller,
-      {bool isDateField = false}) {
+      {bool isDateField = false, bool obscureText = false}) {
     return Column(
       children: [
         Text(label),
@@ -122,6 +128,7 @@ class _HomePageState extends State<HomePage> {
               ),
               child: TextFormField(
                 controller: controller,
+                obscureText: obscureText,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return "Veuillez remplir ce champ";
@@ -130,6 +137,8 @@ class _HomePageState extends State<HomePage> {
                 },
                 decoration: InputDecoration(
                   hintText: hint,
+                  fillColor: CustomTheme.tertiaryColor,
+                  filled: true,
                   hintStyle: TextStyle(color: Colors.grey),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30.0),
@@ -154,8 +163,7 @@ class _HomePageState extends State<HomePage> {
         'first_name': firstNameController.text,
         'last_name': lastNameController.text,
         'email': emailController.text,
-        'birthday': selectedDate.millisecondsSinceEpoch ~/
-            1000, // Convertir en secondes
+        'birthday': selectedDate.millisecondsSinceEpoch ~/ 1000,
         'password': passwordController.text,
       };
 
@@ -170,8 +178,8 @@ class _HomePageState extends State<HomePage> {
             content: Text('Inscription réussie'),
           ),
         );
-        // Redirection vers la page /login
-        Navigator.pushNamed(context, '/login');
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => LoginPage()));
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
