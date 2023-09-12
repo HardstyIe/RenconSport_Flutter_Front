@@ -93,6 +93,22 @@ class _TrainingDescriptionState extends State<TrainingDescription> {
                 ),
               ),
             ),
+            SizedBox(
+              height: 20,
+            ),
+            Text("Derniers avis : ",
+                style: Theme.of(context).textTheme.bodyLarge
+            ),
+            // Add notation system if we can (stars)
+            SizedBox(
+              height: 20,
+            ),
+            Text("Training description from API",
+                style: Theme.of(context).textTheme.bodyLarge
+            ),
+          // BottomNavigationBar(
+            // CustomeBottomNavigationBar(), ? (utiliser celle que Fabien a fait)
+            // ),
           ],
         ),
       ),
