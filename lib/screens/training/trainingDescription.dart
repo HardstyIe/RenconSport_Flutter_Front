@@ -46,18 +46,51 @@ class _TrainingDescriptionState extends State<TrainingDescription> {
             SizedBox(
               height: 20,
             ),
+
             TextButton(onPressed: () {}, child: Text("AJOUTER"),
               style: ButtonStyle(
                 textStyle: MaterialStateProperty.all(Theme.of(context).textTheme.bodyLarge),
-
-              backgroundColor: MaterialStateProperty.all(Colors.green),
-              foregroundColor: MaterialStateProperty.all(Colors.white),
+                backgroundColor: MaterialStateProperty.all(Colors.green),
+                foregroundColor: MaterialStateProperty.all(Colors.white),
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18.0),
                     side: BorderSide(color: Colors.green),
     ),
             ),
+              ),
+            ),
+
+            Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                TextButton(onPressed: () {}, child: Text("SUPPRIMER"),
+                  style: ButtonStyle(
+                    textStyle: MaterialStateProperty.all(Theme.of(context).textTheme.bodyLarge),
+                    backgroundColor: MaterialStateProperty.all(Colors.red),
+                    foregroundColor: MaterialStateProperty.all(Colors.white),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                        side: BorderSide(color: Colors.red),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
+            TextButton(onPressed: () {}, child: Text("MODIFIER"),
+              style: ButtonStyle(
+                textStyle: MaterialStateProperty.all(Theme.of(context).textTheme.bodyLarge),
+                backgroundColor: MaterialStateProperty.all(Colors.blue),
+                foregroundColor: MaterialStateProperty.all(Colors.white),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                    side: BorderSide(color: Colors.blue),
+                  ),
+                ),
               ),
             ),
           ],
