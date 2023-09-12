@@ -27,5 +27,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-// Initialize App for email register with Firebase
-final Future<FirebaseApp> _initialization = Firebase.initializeApp();
