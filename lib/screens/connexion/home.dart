@@ -15,27 +15,24 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SizedBox(
-        child: Column(
-          children: [
-            SizedBox(
-              child: Image(
-                image: AssetImage('sport-demo.jpg'),
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                IconButton(
+      body: 
+            Container(
+              child:
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [     
+                 IconButton(
                   icon: Icon(Icons.close),
                   iconSize: 55,
                   color: Colors.red,
                   onPressed: () {},
                 ),
-                IconButton(
-                  padding: EdgeInsets.only(top: 20),
-                  icon: Icon(Icons.arrow_drop_down),
-                  iconSize: 70,
+                 IconButton(
+                  padding: EdgeInsets.only(bottom: 0),
+                  icon: Icon(Icons.arrow_drop_down_circle_rounded),
+                  color: Theme.of(context).primaryColor,
+                  iconSize: 60,
                   onPressed: () {},
                 ),
                 IconButton(
@@ -44,11 +41,16 @@ class _HomeState extends State<Home> {
                   color: Colors.blue,
                   onPressed: () {},
                 ),
-              ],
+                ]),
+            height: MediaQuery.of(context).size.width *2,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+            image: DecorationImage(
+            image: AssetImage(
+              'muscu.png'
             ),
-          ],
-        ),
-      ),
-    );
+            fit: BoxFit.cover
+            )
+        )));
   }
 }
