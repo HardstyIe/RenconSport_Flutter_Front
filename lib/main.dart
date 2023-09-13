@@ -1,58 +1,105 @@
-/// -----------------------------------
-///          External Packages
-/// -----------------------------------
+import 'package:auth0_flutter/auth0_flutter.dart';
+import 'package:auth0_flutter/auth0_flutter_web.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:renconsport/screens/connexion/login_view.dart';
+import 'package:renconsport/constants/auth.dart';
 
-import '/models/controllers/auth0/auth0_controller.dart';
+const appScheme = "https";
 
-const appScheme = 'HTTPS';
-
-/// -----------------------------------
-///           Profile Widget
-/// -----------------------------------
-
-/// -----------------------------------
-///            Login Widget
-/// -----------------------------------
-
-/// -----------------------------------
-///                 App
-/// -----------------------------------
-
-void main() {
-  runApp(ProviderScope(child: MyApp()));
+void main() async {
+  runApp(const MyApp());
 }
 
-class MyApp extends HookConsumerWidget {
+class MyApp extends StatefulWidget {
+  final Auth0? auth0;
+  const MyApp({this.auth0, final Key? key}) : super(key: key);
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final auth0State = ref.watch(auth0NotifierProvider);
+  State<MyApp> createState() => _MyAppState();
+}
 
-    useEffect(() {
-      Future.microtask(() async {
-        ref.watch(auth0NotifierProvider.notifier).initAction();
+class _MyAppState extends State<MyApp> {
+  UserProfile? _user;
+
+  late Auth0 auth0;
+  late Auth0Web auth0Web;
+
+  @override
+  void initState() {
+    super.initState();
+    auth0 = widget.auth0 ??
+        Auth0(ConstsAuth0.AUTH0_DOMAIN, ConstsAuth0.AUTH0_CLIENT_ID);
+    auth0Web = Auth0Web(ConstsAuth0.AUTH0_DOMAIN, ConstsAuth0.AUTH0_CLIENT_ID);
+
+    if (kIsWeb) {
+      auth0Web.onLoad().then((final credentials) => setState(() {
+            _user = credentials?.user;
+          }));
+    }
+  }
+
+  Future<void> login() async {
+    try {
+      if (kIsWeb) {
+        return auth0Web.loginWithRedirect(redirectUrl: 'http://localhost:3000');
+      }
+
+      var credentials =
+          await auth0.webAuthentication(scheme: appScheme).login();
+
+      setState(() {
+        _user = credentials.user;
       });
+    } catch (e) {
+      print(e);
+    }
+  }
 
-      return;
-    }, const []);
+  Future<void> logout() async {
+    try {
+      if (kIsWeb) {
+        await auth0Web.logout(returnToUrl: 'http://localhost:3000');
+      } else {
+        await auth0.webAuthentication(scheme: appScheme).logout();
+        setState(() {
+          _user = null;
+        });
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 
+  @override
+  Widget build(final BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text("Auth0 state management"),
-          backgroundColor: Colors.green,
-        ),
-        body: Center(
-          child: auth0State.isBusy
-              ? const CircularProgressIndicator()
-              : auth0State.isLoggedIn
-                  ? LoginView()
-                  : LoginView(),
-        ),
-      ),
+          body: Padding(
+        padding: const EdgeInsets.only(),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+          Expanded(
+              child: Row(children: [
+            _user != null ? Text("logged in") : Text("logged out")
+          ])),
+          _user != null
+              ? ElevatedButton(
+                  onPressed: logout,
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.black),
+                  ),
+                  child: const Text('Logout'),
+                )
+              : ElevatedButton(
+                  onPressed: login,
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.black),
+                  ),
+                  child: const Text('Login'),
+                )
+        ]),
+      )),
     );
   }
 }
