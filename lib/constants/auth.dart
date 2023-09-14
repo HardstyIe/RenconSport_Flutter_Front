@@ -5,3 +5,23 @@ class ConstsAuth0 {
   static const String AUTH0_REDIRECT_URI =
       "com.example.renconsport://login-callback";
 }
+
+class Api {
+  static const String NESTJS_BASE_URL = "http://localhost:3000/";
+}
+
+class GlobalData {
+  static final GlobalData _instance = GlobalData._internal();
+  factory GlobalData() => _instance;
+  GlobalData._internal();
+
+  String? authToken;
+
+  setToken(String token) {
+    authToken = token;
+  }
+
+  String? getToken() {
+    return authToken;
+  }
+}
