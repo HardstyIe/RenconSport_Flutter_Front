@@ -1,12 +1,17 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:renconsport/screens/homepage/homepage.dart';
 import 'package:renconsport/screens/training/trainingDescription.dart';
 import 'package:renconsport/services/theme.dart';
 import 'package:renconsport/widgets/appbar.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:renconsport/api/firebase_api.dart';
 
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  await FirebaseApi().initNotifications();
   runApp(const MyApp());
 }
 

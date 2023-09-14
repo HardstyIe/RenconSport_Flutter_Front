@@ -107,7 +107,7 @@ class _TrainingDescriptionState extends State<TrainingDescription> {
                 style: Theme.of(context).textTheme.bodyLarge
             ),
           // BottomNavigationBar(
-            // CustomeBottomNavigationBar(), ? (utiliser celle que Fabien a fait)
+            // CustomeBottomNavigationBar(), ? (utiliser celle que Fabien a fait, ne pas oublier de l'importer)
             // ),
           ],
         ),
