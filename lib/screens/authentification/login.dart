@@ -1,6 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:renconsport/screens/authentification/register.dart';
+import 'package:renconsport/screens/homepage/home.dart';
 import 'package:renconsport/services/authentification/authentificationService.dart';
 import 'package:renconsport/services/users/userService.dart';
 import 'package:renconsport/widgets/text_widget_form.dart';
@@ -54,8 +54,8 @@ class _LoginPageState extends State<LoginPage> {
 
                   if (user != null) {
                     await UserServices.getPersonalInfo();
-                    Navigator.push(
-                        context, MaterialPageRoute(builder: (context) => ()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Home()));
                   }
                 }
               },
@@ -64,8 +64,8 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(height: 20),
             TextButton(
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => RegisterPage()));
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Home()));
               },
               child: Text('Pas encore inscrit ? Enregistrez-vous !'),
             ),
