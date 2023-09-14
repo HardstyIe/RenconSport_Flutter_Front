@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:renconsport/screens/chat/chat.dart';
+import 'package:renconsport/screens/homepage/home.dart';
 
-class CustomBottomNavigationBar extends StatelessWidget implements PreferredSizeWidget {
+class CustomBottomNavigationBar extends StatelessWidget
+    implements PreferredSizeWidget {
   const CustomBottomNavigationBar({super.key});
 
   @override
@@ -9,28 +12,41 @@ class CustomBottomNavigationBar extends StatelessWidget implements PreferredSize
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
-      backgroundColor: Theme.of(context).primaryColor,
-      showSelectedLabels: false,
-      showUnselectedLabels: false,
-      items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-                    icon: Icon(Icons.home),
-                    label: '',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.account_circle),
-                    label: '',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.message),
-                    label: '',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.fitness_center),
-                    label: '',
-                  ),
-      ]    
-    );
+        onTap: (value) {
+          if (value == 0)
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Home()));
+          if (value == 1)
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Home()));
+          if (value == 2)
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => MessagingPage()));
+          if (value == 3)
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Home()));
+        },
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Theme.of(context).primaryColor,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.message),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.fitness_center),
+            label: '',
+          ),
+        ]);
   }
 }
