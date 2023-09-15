@@ -1,7 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:renconsport/screens/authentification/login.dart';
-import 'package:renconsport/services/authentification/authentificationService.dart';
+import 'package:renconsport/services/authentifications/authentificationService.dart';
 import 'package:renconsport/widgets/text_widget_form.dart';
 
 class RegisterPage extends StatefulWidget {
