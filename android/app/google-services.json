@@ -29,6 +29,13 @@
             {
               "client_id": "7717666132-4o5jo9hspn384r1kkf2rp6ns5kko85gt.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "7717666132-48rrjhi952ti20c7ebp6tpodbhp7t40p.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.renconsport"
+              }
             }
           ]
         }
