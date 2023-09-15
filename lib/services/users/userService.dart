@@ -6,6 +6,7 @@ class UserServices {
   static const String url = Api.NESTJS_BASE_URL;
   static const String personalUserInfo = "users/me";
   static const String allUserInfo = "users";
+  static const String updateUserInfo = "users/:id";
   static const String userInfo = "users/:id";
 
   static final Dio _dio = Dio();
@@ -36,6 +37,7 @@ class UserServices {
       print("Erreur lors de la récupération des infos utilisateur: $error");
       return null;
     }
+    return null;
   }
 
   static Future<User?> getAllUserInfo() async {
@@ -64,9 +66,10 @@ class UserServices {
       print("Erreur lors de la récupération des infos utilisateur: $error");
       return null;
     }
+    return null;
   }
 
-  static Future<User?> getOneUserInfo() async {
+  static Future<User?> getOneUserInfo(String uuid) async {
     try {
       String? token = GlobalData().getToken();
       if (token == null) {
@@ -75,7 +78,7 @@ class UserServices {
       }
 
       final response = await _dio.get(
-        url + userInfo,
+        url + userInfo.replaceAll(':id', uuid),
         options: Options(
           headers: {
             "Authorization": "Bearer $token",
@@ -92,9 +95,10 @@ class UserServices {
       print("Erreur lors de la récupération des infos utilisateur: $error");
       return null;
     }
+    return null;
   }
 
-  static Future<User?> updateUserInfo() async {
+  static Future<User?> putUserInfo(String uuid) async {
     try {
       String? token = GlobalData().getToken();
       if (token == null) {
@@ -102,8 +106,8 @@ class UserServices {
         return null;
       }
 
-      final response = await _dio.get(
-        url + userInfo,
+      final response = await _dio.put(
+        url + userInfo.replaceAll(':id', uuid),
         options: Options(
           headers: {
             "Authorization": "Bearer $token",
@@ -120,9 +124,10 @@ class UserServices {
       print("Erreur lors de la récupération des infos utilisateur: $error");
       return null;
     }
+    return null;
   }
 
-  static Future<User?> patchUserInfo() async {
+  static Future<User?> patchUserInfo(String uuid) async {
     try {
       String? token = GlobalData().getToken();
       if (token == null) {
@@ -130,8 +135,8 @@ class UserServices {
         return null;
       }
 
-      final response = await _dio.get(
-        url + userInfo,
+      final response = await _dio.patch(
+        url + userInfo.replaceAll(':id', uuid),
         options: Options(
           headers: {
             "Authorization": "Bearer $token",
@@ -148,5 +153,6 @@ class UserServices {
       print("Erreur lors de la récupération des infos utilisateur: $error");
       return null;
     }
+    return null;
   }
 }

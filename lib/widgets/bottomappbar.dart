@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:renconsport/screens/chat/chat.dart';
 import 'package:renconsport/screens/homepage/home.dart';
+import 'package:renconsport/screens/chat/messagingpage.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget
     implements PreferredSizeWidget {

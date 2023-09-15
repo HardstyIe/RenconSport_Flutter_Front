@@ -1,13 +1,22 @@
 import 'package:dio/dio.dart';
+import 'package:renconsport/constants/auth.dart';
 import 'package:renconsport/models/message.dart';
 
 class MessageService {
-  static const url = "http://localhost:3000/messages";
+  static const url = Api.NESTJS_BASE_URL;
+  static const allMessage = "messages";
+  static const message = "messages/:id";
+  static const sendMessage = "messages/:id";
+  static const putMessage = "messages/:id";
+  static const patchMessages = "messages/:id";
+  static const delMessage = "messages/:id";
+
   static final Dio _dio = Dio();
 
-  static Future<Message?> sendMessage(Map<String, dynamic> messageData) async {
+  static Future<Message?> createMessage(
+      Map<String, dynamic> messageData) async {
     try {
-      final response = await _dio.post(url, data: messageData);
+      final response = await _dio.post(url + sendMessage, data: messageData);
 
       if (response.statusCode == 200) {
         final messageDataJson = response.data as Map<String, dynamic>;
@@ -21,9 +30,10 @@ class MessageService {
     }
   }
 
-  static Future<List<Message>> fetchMessages() async {
+  static Future<List<Message>> getAllMessage() async {
     try {
-      final response = await _dio.get(url); // Assurez-vous que cette URL est correcte.
+      final response = await _dio
+          .get(url + allMessage); // Assurez-vous que cette URL est correcte.
 
       if (response.statusCode == 200) {
         final List<dynamic> messageDataList = response.data as List<dynamic>;
@@ -39,4 +49,76 @@ class MessageService {
     }
   }
 
+  static Future<Message?> getMessage(String id) async {
+    try {
+      final response = await _dio.get(url + message.replaceAll(':id', id));
+
+      if (response.statusCode == 200) {
+        final messageDataJson = response.data as Map<String, dynamic>;
+        final message = Message.fromJson(messageDataJson);
+        return message;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return null;
+    }
+  }
+
+  static Future<Message?> deleteMessage(String id) async {
+    try {
+      final response =
+          await _dio.delete(url + delMessage.replaceAll(':id', id));
+
+      if (response.statusCode == 200) {
+        final messageDataJson = response.data as Map<String, dynamic>;
+        final message = Message.fromJson(messageDataJson);
+        return message;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return null;
+    }
+  }
+
+  static Future<Message?> updateMessage(
+      String id, Map<String, dynamic> messageData) async {
+    try {
+      final response = await _dio.put(
+        url + putMessage.replaceAll(':id', id),
+        data: messageData,
+      );
+
+      if (response.statusCode == 200) {
+        final messageDataJson = response.data as Map<String, dynamic>;
+        final message = Message.fromJson(messageDataJson);
+        return message;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return null;
+    }
+  }
+
+  static Future<Message?> patchMessage(
+      String id, Map<String, dynamic> messageData) async {
+    try {
+      final response = await _dio.patch(
+        url + patchMessages.replaceAll(':id', id),
+        data: messageData,
+      );
+
+      if (response.statusCode == 200) {
+        final messageDataJson = response.data as Map<String, dynamic>;
+        final message = Message.fromJson(messageDataJson);
+        return message;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return null;
+    }
+  }
 }
