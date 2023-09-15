@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:renconsport/models/message.dart';
 import 'package:renconsport/services/messages/messageService.dart';
+import 'package:renconsport/widgets/appbar.dart';
 
 class MessagingPage extends StatefulWidget {
   const MessagingPage({super.key});
@@ -13,6 +14,7 @@ class _MessagingPageState extends State<MessagingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomAppBar(showBackButton: true),
       body: Column(
         children: [
           Container(
@@ -50,21 +52,21 @@ class _MessagingPageState extends State<MessagingPage> {
                   child: const Text('Discutions'),
                   onPressed: () {},
                   style: TextButton.styleFrom(
-                    primary: Colors.black, // Couleur du texte
+                    foregroundColor: Colors.black,
                   ),
                 ),
                 TextButton(
                   child: const Text('Statut'),
                   onPressed: () {},
                   style: TextButton.styleFrom(
-                    primary: Colors.black, // Couleur du texte
+                    foregroundColor: Colors.black,
                   ),
                 ),
                 TextButton(
                   child: const Text('Activités'),
                   onPressed: () {},
                   style: TextButton.styleFrom(
-                    primary: Colors.black, // Couleur du texte
+                    foregroundColor: Colors.black,
                   ),
                 ),
               ],
@@ -72,7 +74,7 @@ class _MessagingPageState extends State<MessagingPage> {
           ),
           Expanded(
             child: FutureBuilder<List<Message>>(
-              future: MessageService.fetchMessages(), // Utilisez votre fonction fetchMessages ici.
+              future: MessageService.fetchMessages(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(
@@ -95,7 +97,6 @@ class _MessagingPageState extends State<MessagingPage> {
                       return ListTile(
                         title: Text(message.content),
                         subtitle: Text(message.senderId),
-                        // Autres informations sur le message et mise en forme.
                       );
                     },
                   );
@@ -106,7 +107,9 @@ class _MessagingPageState extends State<MessagingPage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+
+        },
         backgroundColor: Colors.green,
         child: const Icon(Icons.edit),
       ),
