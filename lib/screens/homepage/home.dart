@@ -42,7 +42,7 @@ class _HomeState extends State<Home> {
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage('muscu.png'), fit: BoxFit.cover))),
+                    image: AssetImage('assets/muscu.png'), fit: BoxFit.cover))),
         bottomNavigationBar: CustomBottomNavigationBar());
   }
 }
