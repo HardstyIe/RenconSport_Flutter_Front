@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:renconsport/models/message.dart';
 import 'package:renconsport/services/messages/messageService.dart';
 import 'package:renconsport/widgets/appbar.dart';
+import 'package:renconsport/screens/chat/composemessagepage.dart';
 
 class MessagingPage extends StatefulWidget {
   const MessagingPage({super.key});
@@ -108,11 +109,16 @@ class _MessagingPageState extends State<MessagingPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => ComposeMessagePage(),
+            ),
+          );
         },
         backgroundColor: Colors.green,
         child: const Icon(Icons.edit),
       ),
+
     );
   }
 }
