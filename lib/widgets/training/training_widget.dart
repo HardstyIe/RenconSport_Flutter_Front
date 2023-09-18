@@ -19,64 +19,35 @@ class TrainingList extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Image.asset(
-                  //image a venir chercher via l'api
-                  'assets/ballon.jpg',
-                  width: 50,
-                  height: 20,
-                ),
-                SizedBox(width: 20),
-                Expanded(
-                  child: Container(
-                    color: CustomTheme.primaryColor,
-                    padding: EdgeInsets.all(20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          "Pseudo: Stephane_59", // Remplacez par le pseudo reel dans l'API
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        Text(
-                          "Lieu:   Paris", // Remplacez par le lieu reel dans l'API
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        SizedBox(height: 10),
-                        Text(
-                          "Date de création: 01/09/2023", // Remplacez par la date de création réelle dans l'API
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        Text(
-                          "Date de fin: 30/09/2023", // Remplacez par la date de fin réelle dans l'API
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ],
-                    ),
+            Container(
+              height: 70,
+              decoration: BoxDecoration(
+                  color: CustomTheme.primaryColor,
+                  borderRadius: BorderRadius.circular(20)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Image.asset(
+                    //image a venir chercher via l'api
+                    'assets/sport-demo.jpg',
+                    width: 50,
+                    height: 20,
                   ),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                Text(
-                  "Voir +", // redirection vers la Page decription de l'activités
-                  style: TextStyle(
-                    color: CustomTheme
-                        .primaryColor, // Couleur personnalisée pour le texte
-                    fontWeight: FontWeight.bold,
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text("data"),
+                      Text("data"),
+                    ],
                   ),
-                ),
-                SizedBox(width: 5), // Espace entre le texte et l'icône
-                Icon(
-                  Icons.visibility,
-                  color: CustomTheme
-                      .primaryColor, // Couleur personnalisée pour l'icône
-                ),
-              ],
+                  Column(
+                    children: [
+                      Text("data"),
+                      Text("data"),
+                    ],
+                  )
+                ],
+              ),
             ),
           ],
         ),
