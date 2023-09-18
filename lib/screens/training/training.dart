@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:renconsport/services/theme.dart';
+import 'package:renconsport/widgets/appbar.dart';
 import 'package:renconsport/widgets/bottomappbar.dart';
 
 class Training extends StatefulWidget {
@@ -13,6 +14,7 @@ class _TrainingState extends State<Training> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomAppBar(showBackButton: true),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -30,7 +32,7 @@ class _TrainingState extends State<Training> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Image.asset( //image a venir chercher via l'api
-                    'assets/ballon.jpg',
+                    'assets/sport-demo.jpg',
                     width: 50,
                     height: 20,
                   ),

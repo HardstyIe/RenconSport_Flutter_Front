@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:renconsport/widgets/appbar.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -11,6 +12,7 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomAppBar(showBackButton: true),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -20,7 +22,7 @@ class _ProfileState extends State<Profile> {
               height: 350,
               width: double.infinity,
               child: Image.asset(
-                'assets/Sport.jpg',
+                'assets/sport-demo.jpg',
                 fit: BoxFit.cover,
               ),
             ),
