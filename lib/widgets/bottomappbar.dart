@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:renconsport/screens/chat/messagingpage.dart';
 import 'package:renconsport/screens/homepage/home.dart';
+import 'package:renconsport/screens/profile/profile.dart';
+import 'package:renconsport/screens/training/training.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget
     implements PreferredSizeWidget {
@@ -18,13 +20,13 @@ class CustomBottomNavigationBar extends StatelessWidget
                 context, MaterialPageRoute(builder: (context) => Home()));
           if (value == 1)
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Home()));
+                context, MaterialPageRoute(builder: (context) => Profile()));
           if (value == 2)
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => MessagingPage()));
           if (value == 3)
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Home()));
+                context, MaterialPageRoute(builder: (context) => Training()));
         },
         type: BottomNavigationBarType.fixed,
         backgroundColor: Theme.of(context).primaryColor,

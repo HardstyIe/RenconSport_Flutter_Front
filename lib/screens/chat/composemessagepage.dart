@@ -26,7 +26,7 @@ class _ComposeMessagePageState extends State<ComposeMessagePage> {
 
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Message envoyé avec succès'),
+            content: Text('Message envoyé'),
           ),
         );
 
