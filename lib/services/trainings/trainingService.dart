@@ -65,7 +65,7 @@ class TrainingService {
   static Future<dynamic> deleteTraining(String id) async {
     try {
       final response =
-          await _dio.delete(url + delTraining.replaceAll(':id', id));
+      await _dio.delete(url + delTraining.replaceAll(':id', id));
 
       if (response.statusCode == 200) {
         final trainingDataJson = response.data as Map<String, dynamic>;

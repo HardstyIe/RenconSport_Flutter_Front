@@ -1,9 +1,12 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:renconsport/screens/authentification/register.dart';
 import 'package:renconsport/screens/homepage/home.dart';
 import 'package:renconsport/services/authentifications/authentificationService.dart';
 import 'package:renconsport/services/users/userService.dart';
 import 'package:renconsport/widgets/text_widget_form.dart';
+
+import '../../widgets/appbar.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -27,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: CustomAppBar(showBackButton: true),
       body: Form(
         key: _formKey,
         child: Column(

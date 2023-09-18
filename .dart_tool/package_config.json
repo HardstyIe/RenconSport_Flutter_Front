@@ -236,6 +236,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "flutter_card_swiper",
+      "rootUri": "file:///home/hardstyle/.pub-cache/hosted/pub.dev/flutter_card_swiper-6.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_dotenv",
       "rootUri": "file:///home/hardstyle/.pub-cache/hosted/pub.dev/flutter_dotenv-5.1.0",
       "packageUri": "lib/",
@@ -626,7 +632,7 @@
       "languageVersion": "3.1"
     }
   ],
-  "generated": "2023-09-18T13:23:15.612595Z",
+  "generated": "2023-09-18T13:48:35.053873Z",
   "generator": "pub",
   "generatorVersion": "3.1.2"
 }
