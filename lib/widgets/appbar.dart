@@ -12,17 +12,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: Theme.of(context).primaryColor,
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Image.asset(
-            'assets/LogoGood.png',
-            width: 140,
-            height: 160,
-          ),
-        ],
+      title: SizedBox(
+        width: 140,
+        height: 160,
+        child: Image.asset(
+          'assets/LogoGood.png',
+
+        ),
       ),
+      centerTitle: true,
 
       leading: showBackButton
           ? IconButton(
