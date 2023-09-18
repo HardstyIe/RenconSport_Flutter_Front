@@ -1,11 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:renconsport/constants/auth.dart';
-import 'package:renconsport/models/user.dart';
+import 'package:renconsport/models/user/user.dart';
 
 class UserServices {
   static const String url = Api.NESTJS_BASE_URL;
   static const String personalUserInfo = "users/me";
   static const String allUserInfo = "users";
+  static const String updateUserInfo = "users/:id";
   static const String userInfo = "users/:id";
 
   static final Dio _dio = Dio();
@@ -36,9 +37,10 @@ class UserServices {
       print("Erreur lors de la récupération des infos utilisateur: $error");
       return null;
     }
+    return null;
   }
 
-  static Future<List<User>?> getAllUserInfo() async {
+  static Future<User?> getAllUserInfo() async {
     try {
       String? token = GlobalData().getToken();
       if (token == null) {
@@ -55,31 +57,19 @@ class UserServices {
         ),
       );
 
-      print("Code de réponse de l'API : ${response.statusCode}");
-
       if (response.statusCode == 200) {
-        final dynamic responseData = response.data;
-        print("Données renvoyées par l'API : $responseData");
-
-        if (responseData is Map<String, dynamic> && responseData.containsKey('result')) {
-          final List<dynamic> userDataList = responseData['result'];
-          final List<User> userList = userDataList.map((userData) => User.fromJson(userData)).toList();
-          print("Liste d'utilisateurs récupérée avec succès: $userList");
-          return userList;
-        } else {
-          print("Les données renvoyées ne contiennent pas de champ 'result' ou ce champ n'est pas une liste.");
-          return null;
-        }
+        final userDataJson = response.data as Map<String, dynamic>;
+        final user = User.fromJson(userDataJson);
+        return user;
       }
     } catch (error) {
       print("Erreur lors de la récupération des infos utilisateur: $error");
       return null;
     }
+    return null;
   }
 
-
-
-  static Future<User?> getOneUserInfo() async {
+  static Future<User?> getOneUserInfo(String uuid) async {
     try {
       String? token = GlobalData().getToken();
       if (token == null) {
@@ -88,7 +78,7 @@ class UserServices {
       }
 
       final response = await _dio.get(
-        url + userInfo,
+        url + userInfo.replaceAll(':id', uuid),
         options: Options(
           headers: {
             "Authorization": "Bearer $token",
@@ -105,9 +95,10 @@ class UserServices {
       print("Erreur lors de la récupération des infos utilisateur: $error");
       return null;
     }
+    return null;
   }
 
-  static Future<User?> updateUserInfo() async {
+  static Future<User?> putUserInfo(String uuid) async {
     try {
       String? token = GlobalData().getToken();
       if (token == null) {
@@ -115,8 +106,8 @@ class UserServices {
         return null;
       }
 
-      final response = await _dio.get(
-        url + userInfo,
+      final response = await _dio.put(
+        url + userInfo.replaceAll(':id', uuid),
         options: Options(
           headers: {
             "Authorization": "Bearer $token",
@@ -133,9 +124,10 @@ class UserServices {
       print("Erreur lors de la récupération des infos utilisateur: $error");
       return null;
     }
+    return null;
   }
 
-  static Future<User?> patchUserInfo() async {
+  static Future<User?> patchUserInfo(String uuid) async {
     try {
       String? token = GlobalData().getToken();
       if (token == null) {
@@ -143,8 +135,8 @@ class UserServices {
         return null;
       }
 
-      final response = await _dio.get(
-        url + userInfo,
+      final response = await _dio.patch(
+        url + userInfo.replaceAll(':id', uuid),
         options: Options(
           headers: {
             "Authorization": "Bearer $token",
@@ -161,5 +153,6 @@ class UserServices {
       print("Erreur lors de la récupération des infos utilisateur: $error");
       return null;
     }
+    return null;
   }
 }

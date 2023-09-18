@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -28,15 +25,9 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return web;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -48,6 +39,16 @@ class DefaultFirebaseOptions {
         );
     }
   }
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyD38Sd1BJuxiGD61c0HWuWfHWwqnJU03C0',
+    appId: '1:7717666132:web:95edf9c3cc4334d9119cc1',
+    messagingSenderId: '7717666132',
+    projectId: 'renconsport',
+    authDomain: 'renconsport.firebaseapp.com',
+    storageBucket: 'renconsport.appspot.com',
+    measurementId: 'G-G9C14QFPT8',
+  );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDzM4bGZNDo8TMqXI5o9wyYg9oy2TmaoNQ',
@@ -63,7 +64,19 @@ class DefaultFirebaseOptions {
     messagingSenderId: '7717666132',
     projectId: 'renconsport',
     storageBucket: 'renconsport.appspot.com',
-    iosClientId: '7717666132-48rrjhi952ti20c7ebp6tpodbhp7t40p.apps.googleusercontent.com',
+    iosClientId:
+        '7717666132-48rrjhi952ti20c7ebp6tpodbhp7t40p.apps.googleusercontent.com',
     iosBundleId: 'com.example.renconsport',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyBpDw46rTPaqVots-OkWpBf93bM04lZdFA',
+    appId: '1:7717666132:ios:aec9457722cafe27119cc1',
+    messagingSenderId: '7717666132',
+    projectId: 'renconsport',
+    storageBucket: 'renconsport.appspot.com',
+    iosClientId:
+        '7717666132-44r1gmqd2h726hsjn3iok40rq0k94uhl.apps.googleusercontent.com',
+    iosBundleId: 'com.example.renconsport.RunnerTests',
   );
 }

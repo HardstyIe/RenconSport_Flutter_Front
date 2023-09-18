@@ -1,18 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(RenconSportApp());
-}
-
-class RenconSportApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: ContactPage(),
-    );
-  }
-}
-
 class ContactPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

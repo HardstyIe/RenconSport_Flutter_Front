@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: CustomTheme.defaultTheme,
       home: Scaffold(
-        body: RegisterPage(),
+        body: Home(),
         appBar: CustomAppBar(showBackButton: false,),
         bottomNavigationBar: CustomBottomNavigationBar(),
       ),
