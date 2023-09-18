@@ -38,7 +38,7 @@ class UserServices {
     }
   }
 
-  static Future<User?> getAllUserInfo() async {
+  static Future<List<User>?> getAllUserInfo() async {
     try {
       String? token = GlobalData().getToken();
       if (token == null) {
@@ -55,16 +55,29 @@ class UserServices {
         ),
       );
 
+      print("Code de réponse de l'API : ${response.statusCode}");
+
       if (response.statusCode == 200) {
-        final userDataJson = response.data as Map<String, dynamic>;
-        final user = User.fromJson(userDataJson);
-        return user;
+        final dynamic responseData = response.data;
+        print("Données renvoyées par l'API : $responseData");
+
+        if (responseData is Map<String, dynamic> && responseData.containsKey('result')) {
+          final List<dynamic> userDataList = responseData['result'];
+          final List<User> userList = userDataList.map((userData) => User.fromJson(userData)).toList();
+          print("Liste d'utilisateurs récupérée avec succès: $userList");
+          return userList;
+        } else {
+          print("Les données renvoyées ne contiennent pas de champ 'result' ou ce champ n'est pas une liste.");
+          return null;
+        }
       }
     } catch (error) {
       print("Erreur lors de la récupération des infos utilisateur: $error");
       return null;
     }
   }
+
+
 
   static Future<User?> getOneUserInfo() async {
     try {

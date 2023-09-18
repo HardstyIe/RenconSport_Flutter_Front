@@ -1,17 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:renconsport/models/message.dart';
+import 'package:renconsport/models/user.dart';
 import 'package:renconsport/services/messages/messageService.dart';
+import 'package:renconsport/services/users/userService.dart';
 import 'package:renconsport/widgets/appbar.dart';
 import 'package:renconsport/screens/chat/composemessagepage.dart';
 
 class MessagingPage extends StatefulWidget {
-  const MessagingPage({super.key});
+  const MessagingPage({Key? key});
 
   @override
   State<MessagingPage> createState() => _MessagingPageState();
 }
 
 class _MessagingPageState extends State<MessagingPage> {
+  List<User>? users;
+
+  @override
+  void initState() {
+    super.initState();
+    getUsers();
+  }
+
+  void getUsers() async {
+    final userList = await UserServices.getAllUserInfo();
+    setState(() {
+      users = userList;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +67,7 @@ class _MessagingPageState extends State<MessagingPage> {
                   icon: Icon(Icons.camera_alt_outlined),
                 ),
                 TextButton(
-                  child: const Text('Discutions'),
+                  child: const Text('Discussions'),
                   onPressed: () {},
                   style: TextButton.styleFrom(
                     foregroundColor: Colors.black,
@@ -74,7 +91,20 @@ class _MessagingPageState extends State<MessagingPage> {
             ),
           ),
           Expanded(
-            child: FutureBuilder<List<Message>>(
+            child: users != null && users!.isNotEmpty
+                ? ListView.builder(
+              itemCount: users!.length,
+              itemBuilder: (context, index) {
+                final user = users![index];
+                return ListTile(
+                  title: Text(user.email ?? ''),
+                  subtitle: Text(user.email ?? ''),
+                  // Ajoutez d'autres champs d'utilisateur que vous souhaitez afficher ici.
+                );
+
+              },
+            )
+                : FutureBuilder<List<Message>>(
               future: MessageService.fetchMessages(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
@@ -83,7 +113,8 @@ class _MessagingPageState extends State<MessagingPage> {
                   );
                 } else if (snapshot.hasError) {
                   return Center(
-                    child: Text('Une erreur s\'est produite : ${snapshot.error}'),
+                    child: Text(
+                        'Une erreur s\'est produite : ${snapshot.error}'),
                   );
                 } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
                   return Center(
@@ -118,7 +149,6 @@ class _MessagingPageState extends State<MessagingPage> {
         backgroundColor: Colors.green,
         child: const Icon(Icons.edit),
       ),
-
     );
   }
 }
