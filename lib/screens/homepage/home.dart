@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:renconsport/screens/profile/profile.dart';
 import 'package:renconsport/widgets/bottomappbar.dart';
+import 'package:renconsport/widgets/message/message_widget.dart';
+import 'package:renconsport/widgets/swipe/tinder_like.dart';
+import 'package:renconsport/widgets/training/training_widget.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -9,40 +13,25 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  List<Widget> widgets = [
+    SwipeCard(),
+    Profile(),
+    MessagePage(),
+    TrainingList()
+  ];
+
+  int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
-        body: Container(
-            child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  IconButton(
-                    icon: Icon(Icons.close),
-                    iconSize: 55,
-                    color: Colors.red,
-                    onPressed: () {},
-                  ),
-                  IconButton(
-                    padding: EdgeInsets.only(bottom: 0),
-                    icon: Icon(Icons.arrow_drop_down_circle_rounded),
-                    color: Theme.of(context).primaryColor,
-                    iconSize: 60,
-                    onPressed: () {},
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.thumb_up_alt_sharp),
-                    iconSize: 50,
-                    color: Colors.blue,
-                    onPressed: () {},
-                  ),
-                ]),
-            height: MediaQuery.of(context).size.width * 2,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('assets/muscu.png'), fit: BoxFit.cover))),
-        bottomNavigationBar: CustomBottomNavigationBar());
+        body: widgets[_currentIndex],
+        bottomNavigationBar: CustomNavigationBar(
+          onTap: changePage,
+        ));
+  }
+
+  void changePage(index) {
+    if (index == _currentIndex) return;
+    setState(() => _currentIndex = index);
   }
 }

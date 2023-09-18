@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:renconsport/constants/auth.dart';
-import 'package:renconsport/models/user.dart';
+import 'package:renconsport/models/user/user.dart';
 
 class UserServices {
   static const String url = Api.NESTJS_BASE_URL;
