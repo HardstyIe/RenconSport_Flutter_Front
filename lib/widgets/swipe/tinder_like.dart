@@ -1,28 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:renconsport/models/user/user.dart';
+import 'package:renconsport/widgets/swipe/popup/popup_bio.dart';
 
-class SwipeCard extends StatelessWidget {
+class SwipeCard extends ConsumerWidget {
   const SwipeCard({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final user = ref.watch(userProvider);
     return Container(
         child: Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
+              Text(
+                "Bonjour ${user.first_name}  ${user.last_name}",
+                style: TextStyle(color: Colors.amberAccent),
+              ),
               IconButton(
                 icon: Icon(Icons.close),
                 iconSize: 55,
                 color: Colors.red,
                 onPressed: () {},
               ),
-              IconButton(
-                padding: EdgeInsets.only(bottom: 0),
-                icon: Icon(Icons.arrow_drop_down_circle_rounded),
-                color: Theme.of(context).primaryColor,
-                iconSize: 60,
-                onPressed: () {},
-              ),
+              PopupBio(),
               IconButton(
                 icon: Icon(Icons.thumb_up_alt_sharp),
                 iconSize: 50,

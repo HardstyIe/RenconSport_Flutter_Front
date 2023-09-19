@@ -1,37 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:renconsport/provider/state.dart';
 import 'package:renconsport/widgets/bottomappbar.dart';
 import 'package:renconsport/widgets/message/message_widget.dart';
 import 'package:renconsport/widgets/profile/profile_widget.dart';
 import 'package:renconsport/widgets/swipe/tinder_like.dart';
 import 'package:renconsport/widgets/training/training_widget.dart';
 
-class Home extends StatefulWidget {
+class Home extends ConsumerStatefulWidget {
   const Home({Key? key}) : super(key: key);
 
   @override
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
-  List<Widget> widgets = [
-    SwipeCard(),
-    Profile(),
-    MessagePage(),
-    TrainingList()
-  ];
-
-  int _currentIndex = 0;
+class _HomeState extends ConsumerState<Home> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: widgets[_currentIndex],
-        bottomNavigationBar: CustomNavigationBar(
-          onTap: changePage,
-        ));
-  }
+    final index = ref.watch(currentIndexProvider);
 
-  void changePage(index) {
-    if (index == _currentIndex) return;
-    setState(() => _currentIndex = index);
+    List<Widget> widgets = [
+      SwipeCard(),
+      Profile(),
+      MessagePage(),
+      TrainingList()
+    ];
+
+    return Scaffold(
+      body: widgets[index],
+      bottomNavigationBar: CustomNavigationBar(
+        onTap: (newIndex) {
+          ref.read(currentIndexProvider.notifier).state = newIndex;
+        },
+      ),
+    );
   }
 }

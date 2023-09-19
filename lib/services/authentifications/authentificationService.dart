@@ -18,20 +18,13 @@ class AuthentificationServices {
         data: userData,
       );
 
-      if (response.statusCode == 200) {
-        final userDataJson = response.data as Map<String, dynamic>;
-        final user = User.fromJson(userDataJson);
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text("Inscription réussie")));
-        return user;
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Échec de l\'inscription'),
-          ),
-        );
-        return null;
-      }
+      if (response.statusCode != 201)
+        throw Exception("Erreur lors de l'inscription");
+      final userDataJson = response.data as Map<String, dynamic>;
+      final user = User.fromJson(userDataJson);
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Inscription réussie")));
+      return user;
     } catch (error) {
       print("Erreur lors de l'inscription: $error");
       ScaffoldMessenger.of(context).showSnackBar(
@@ -46,33 +39,24 @@ class AuthentificationServices {
   static Future<User?> loginUser(
       Map<String, dynamic> userData, BuildContext context) async {
     try {
-      final response = await _dio.post(
+      final result = await _dio.post(
         url + login,
         data: userData,
       );
 
-      if (response.statusCode == 200) {
-        final userDataJson = response.data as Map<String, dynamic>;
+      if (result.statusCode != 201)
+        throw Exception("Erreur lors de la connection");
+      final userDataJson = result.data as Map<String, dynamic>;
 
-        final user = User.fromJson(userDataJson);
-        String token = userDataJson['result']['token'];
+      final user = User.fromJson(userDataJson);
+      String token = userDataJson['token'];
 
-        // Stockez le token dans le singleton
-        GlobalData().setToken(token);
+      GlobalData().setToken(token);
 
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text("Connexion réussie")));
-        return user;
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Échec de la connexion'),
-          ),
-        );
-        return null;
-      }
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Connexion réussie")));
+      return user;
     } catch (error) {
-      print('Erreur lors de la connexion: $error');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Erreur lors de la connexion'),

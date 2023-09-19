@@ -1,21 +1,22 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:renconsport/models/user/user.dart'; // Assurez-vous que cet import est correct
 import 'package:renconsport/screens/authentification/register.dart';
 import 'package:renconsport/screens/homepage/home.dart';
 import 'package:renconsport/services/authentifications/authentificationService.dart';
 import 'package:renconsport/services/users/userService.dart';
+import 'package:renconsport/widgets/appbar.dart';
 import 'package:renconsport/widgets/text_widget_form.dart';
 
-import '../../widgets/appbar.dart';
-
-class LoginPage extends StatefulWidget {
+class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends ConsumerState<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -54,11 +55,19 @@ class _LoginPageState extends State<LoginPage> {
                     "email": emailController.text,
                     "password": passwordController.text
                   }, context);
-
                   if (user != null) {
-                    await UserServices.getPersonalInfo();
+                    final newUser = await UserServices.getPersonalInfo();
+
+                    ref.read(userProvider.notifier).updateUser(newUser);
+
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => Home()));
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Erreur lors de la connexion'),
+                      ),
+                    );
                   }
                 }
               },
@@ -67,8 +76,8 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(height: 20),
             TextButton(
               onPressed: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Home()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => RegisterPage()));
               },
               child: Text('Pas encore inscrit ? Enregistrez-vous !'),
             ),

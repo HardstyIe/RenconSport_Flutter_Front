@@ -28,16 +28,15 @@ class UserServices {
         ),
       );
 
-      if (response.statusCode == 200) {
-        final userDataJson = response.data as Map<String, dynamic>;
-        final user = User.fromJson(userDataJson);
-        return user;
-      }
+      if (response.statusCode != 201)
+        throw Exception("impossible de recuperer les données");
+      final userDataJson = response.data as Map<String, dynamic>;
+      final user = User.fromJson(userDataJson);
+      return user;
     } catch (error) {
       print("Erreur lors de la récupération des infos utilisateur: $error");
       return null;
     }
-    return null;
   }
 
   static Future<User?> getAllUserInfo() async {
