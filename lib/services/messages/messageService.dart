@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:renconsport/models/message.dart';
-
+import 'package:renconsport/models/group/message/message.dart';
 class MessageService {
   static const url = "http://localhost:3000/messages";
   static final Dio _dio = Dio();

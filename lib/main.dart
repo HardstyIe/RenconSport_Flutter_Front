@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:renconsport/screens/authentification/register.dart';
 import 'package:renconsport/screens/homepage/home.dart';
 import 'package:renconsport/services/theme.dart';
 import 'package:renconsport/widgets/appbar.dart';
@@ -25,7 +26,6 @@ class MyApp extends StatelessWidget {
         appBar: CustomAppBar(
           showBackButton: false,
         ),
-        bottomNavigationBar: CustomNavigationBar(onTap: () {}),
       ),
     );
   }

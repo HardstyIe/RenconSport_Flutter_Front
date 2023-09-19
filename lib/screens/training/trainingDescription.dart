@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:renconsport/widgets/appbar.dart';
 
 class TrainingDescription extends StatefulWidget {
   const TrainingDescription({super.key});

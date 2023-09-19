@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:renconsport/screens/authentification/login.dart';
+import 'package:renconsport/screens/authentification/register.dart';
 import 'package:renconsport/widgets/bottomappbar.dart';
 import 'package:renconsport/widgets/message/message_widget.dart';
 import 'package:renconsport/widgets/profile/profile_widget.dart';
@@ -24,6 +26,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
         body: widgets[_currentIndex],
         bottomNavigationBar: CustomNavigationBar(
           onTap: changePage,
