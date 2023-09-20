@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:renconsport/provider/state.dart';
+import 'package:renconsport/widgets/appbar.dart';
 import 'package:renconsport/widgets/bottomappbar.dart';
 import 'package:renconsport/widgets/message/message_widget.dart';
 import 'package:renconsport/widgets/profile/profile_widget.dart';
@@ -27,6 +28,7 @@ class _HomeState extends ConsumerState<Home> {
     ];
 
     return Scaffold(
+      appBar: CustomAppBar(showBackButton: true),
       body: widgets[index],
       bottomNavigationBar: CustomNavigationBar(
         onTap: (newIndex) {

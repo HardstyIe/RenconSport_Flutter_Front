@@ -1,30 +1,70 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:renconsport/models/group/message/message.dart';
+import 'package:renconsport/models/training/training.dart';
 
 class User {
-  final String? user_id;
+  final String? id;
   final String? email;
+  final String? phoneNumber;
   final String? password;
-  final String? first_name;
-  final String? last_name;
+  final String? firstName;
+  final String? lastName;
+  final String? biography;
+  final DateTime? birthday;
+  final bool? isAdmin;
+  final String? avatar;
+  final List<Training>? createdTrainings;
+  final List<Training>? joinedTrainings;
+  final List<Message>? messages;
 
-  User(
-    this.user_id,
+  User({
+    this.id,
     this.email,
+    this.phoneNumber,
     this.password,
-    this.first_name,
-    this.last_name,
-  );
+    this.firstName,
+    this.lastName,
+    this.biography,
+    this.birthday,
+    this.isAdmin,
+    this.avatar,
+    this.createdTrainings,
+    this.joinedTrainings,
+    this.messages,
+  });
 
-  User.fromJson(Map<String, dynamic> json)
-      : user_id = json["id"] as String?,
-        email = json["email"] as String?,
-        password = json["password"] as String?,
-        first_name = json["first_name"] as String?,
-        last_name = json["last_name"] as String?;
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+      id: json['id'],
+      email: json['email'],
+      phoneNumber: json['phoneNumber'],
+      password: json['password'],
+      firstName: json['firstName'],
+      lastName: json['lastName'],
+      biography: json['biography'],
+      birthday:
+          json['birthday'] != null ? DateTime.parse(json['birthday']) : null,
+      isAdmin: json['isAdmin'],
+      avatar: json['avatar'],
+      createdTrainings: json['createdTrainings'] != null
+          ? (json['createdTrainings'] as List)
+              .map((i) => Training.fromJson(i))
+              .toList()
+          : null,
+      joinedTrainings: json['joinedTrainings'] != null
+          ? (json['joinedTrainings'] as List)
+              .map((i) => Training.fromJson(i))
+              .toList()
+          : null,
+      messages: json['messages'] != null
+          ? (json['messages'] as List).map((i) => Message.fromJson(i)).toList()
+          : null,
+    );
+  }
 }
 
 final userProvider = StateNotifierProvider<UserNotifier, User>((ref) {
-  return UserNotifier(User(null, null, null, null, null));
+  return UserNotifier(User());
 });
 
 class UserNotifier extends StateNotifier<User> {

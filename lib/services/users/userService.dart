@@ -28,7 +28,7 @@ class UserServices {
         ),
       );
 
-      if (response.statusCode != 201)
+      if (response.statusCode != 200)
         throw Exception("impossible de recuperer les données");
       final userDataJson = response.data as Map<String, dynamic>;
       final user = User.fromJson(userDataJson);

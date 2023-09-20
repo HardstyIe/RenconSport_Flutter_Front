@@ -5,7 +5,6 @@ import 'package:renconsport/models/user/user.dart';
 import 'package:renconsport/screens/authentification/register.dart';
 import 'package:renconsport/services/theme.dart';
 import 'package:renconsport/widgets/appbar.dart';
-import 'package:renconsport/widgets/bottomappbar.dart';
 
 void main() async {
   // WidgetsFlutterBinding.ensureInitialized();
@@ -33,7 +32,6 @@ class MyApp extends ConsumerWidget {
           showBackButton: false,
         ),
         body: RegisterPage(),
-        bottomNavigationBar: CustomNavigationBar(onTap: () {}),
       ),
     );
   }

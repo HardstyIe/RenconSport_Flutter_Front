@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:renconsport/models/user/user.dart';
 
-class Profile extends StatelessWidget {
+class Profile extends ConsumerWidget {
   const Profile({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final user = ref.watch(userProvider);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -12,7 +15,7 @@ class Profile extends StatelessWidget {
           height: 350,
           width: double.infinity,
           child: Image.asset(
-            'assets/Sport.jpg',
+            'assets/${user.avatar}',
             fit: BoxFit.cover,
           ),
         ),
@@ -21,14 +24,14 @@ class Profile extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Pseudo',
+              '${user.firstName}',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),
             Text(
-              'Âge : 33', // Remplacez par l'âge réel
+              'Âge : ${user.birthday}',
               style: TextStyle(
                 fontSize: 16,
               ),
@@ -42,7 +45,7 @@ class Profile extends StatelessWidget {
             Icon(Icons.school),
             SizedBox(width: 4),
             Text(
-              'Niveau : bac + 5',
+              'Email: ${user.email}',
               style: TextStyle(
                 fontSize: 16,
               ),
@@ -53,10 +56,10 @@ class Profile extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Icon(Icons.fitness_center),
+            Icon(Icons.phone),
             SizedBox(width: 4),
             Text(
-              'Passionné de football, de basket et de tennis',
+              'Telephone : ${user.phoneNumber}',
               style: TextStyle(
                 fontSize: 16,
               ),
@@ -70,7 +73,7 @@ class Profile extends StatelessWidget {
             Icon(Icons.location_on),
             SizedBox(width: 4),
             Text(
-              'Paris, France',
+              'Placeholder adresse',
               style: TextStyle(
                 fontSize: 16,
               ),
@@ -82,8 +85,7 @@ class Profile extends StatelessWidget {
           color: Colors.grey[400],
           padding: EdgeInsets.all(16.0),
           child: Text(
-            'Description : Mettez ici votre description personnelle. '
-            'Vous pouvez parler de vos hobbies, de vos intérêts, de vos objectifs, etc.',
+            'Description : ${user.biography}',
             style: TextStyle(
               fontSize: 16,
             ),

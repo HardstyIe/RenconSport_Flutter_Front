@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:renconsport/constants/auth.dart';
+import 'package:renconsport/models/training/trainings_details.dart';
 
 class TrainingService {
   static final url = Api.NESTJS_BASE_URL;
@@ -11,14 +12,14 @@ class TrainingService {
 
   static final Dio _dio = Dio();
 
-  static Future<List<dynamic>> getAllTraining() async {
+  static Future<List<TrainingDetail>> getAllTraining() async {
     try {
       final response = await _dio.get(url + allTraining);
 
       if (response.statusCode == 200) {
         final List<dynamic> trainingDataList = response.data as List<dynamic>;
-        final List<dynamic> trainings = trainingDataList.map((data) {
-          return data;
+        final List<TrainingDetail> trainings = trainingDataList.map((data) {
+          return TrainingDetail.fromJson(data);
         }).toList();
         return trainings;
       } else {
@@ -65,7 +66,7 @@ class TrainingService {
   static Future<dynamic> deleteTraining(String id) async {
     try {
       final response =
-      await _dio.delete(url + delTraining.replaceAll(':id', id));
+          await _dio.delete(url + delTraining.replaceAll(':id', id));
 
       if (response.statusCode == 200) {
         final trainingDataJson = response.data as Map<String, dynamic>;

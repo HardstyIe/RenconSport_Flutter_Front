@@ -56,9 +56,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     "password": passwordController.text
                   }, context);
                   if (user != null) {
-                    final newUser = await UserServices.getPersonalInfo();
+                    User? newUser = await UserServices.getPersonalInfo();
 
-                    ref.read(userProvider.notifier).updateUser(newUser);
+                    ref.read(userProvider.notifier).updateUser(newUser!);
 
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => Home()));

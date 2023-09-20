@@ -14,10 +14,6 @@ class SwipeCard extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text(
-                "Bonjour ${user.first_name}  ${user.last_name}",
-                style: TextStyle(color: Colors.amberAccent),
-              ),
               IconButton(
                 icon: Icon(Icons.close),
                 iconSize: 55,
