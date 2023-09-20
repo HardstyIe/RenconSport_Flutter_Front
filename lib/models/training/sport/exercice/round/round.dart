@@ -3,7 +3,7 @@ class Round {
   final String? trainingId;
   final String? exerciceId;
   final int? duration;
-  final int sets;
+  final int? sets;
   final int? repetitions;
   final double? weight;
 

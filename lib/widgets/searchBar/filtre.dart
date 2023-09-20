@@ -221,8 +221,7 @@ class _FilterAppState extends State<FilterApp> {
                       children: [
                         ElevatedButton(
                           onPressed: () {
-                            if (selectedSport != null &&
-                                location.isNotEmpty &&
+                            if (location.isNotEmpty &&
                                 numberOfPlayers > 0 &&
                                 timeOut > 0) {
                               Filter newFilter = Filter(sport: selectedSport)

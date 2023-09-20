@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:renconsport/constants/auth.dart';
 
 class LocationService {
@@ -10,10 +11,22 @@ class LocationService {
   static const delLocation = "locations/:id";
 
   static final Dio _dio = Dio();
+  static final storage = FlutterSecureStorage(); // Ajouté
+
+  static Future<String?> getToken() async {
+    return await storage.read(key: 'authToken'); // Ajouté
+  }
 
   static Future<List<dynamic>> getAllLocation() async {
     try {
-      final response = await _dio.get(url + allLocation);
+      String? token = await getToken(); // Ajouté
+
+      final response = await _dio.get(
+        url + allLocation,
+        options: Options(
+          headers: {"Authorization": "Bearer $token"}, // Ajouté
+        ),
+      );
 
       if (response.statusCode == 200) {
         final List<dynamic> locationDataList = response.data as List<dynamic>;
@@ -31,7 +44,14 @@ class LocationService {
 
   static Future<Map<String, dynamic>?> getLocation(String id) async {
     try {
-      final response = await _dio.get(url + location.replaceAll(':id', id));
+      String? token = await getToken(); // Ajouté
+
+      final response = await _dio.get(
+        url + location.replaceAll(':id', id),
+        options: Options(
+          headers: {"Authorization": "Bearer $token"}, // Ajouté
+        ),
+      );
 
       if (response.statusCode == 200) {
         final locationDataJson = response.data as Map<String, dynamic>;
@@ -48,7 +68,15 @@ class LocationService {
   static Future<dynamic> createLocation(
       Map<String, dynamic> locationData) async {
     try {
-      final response = await _dio.post(url + sendLocation, data: locationData);
+      String? token = await getToken(); // Ajouté
+
+      final response = await _dio.post(
+        url + sendLocation,
+        data: locationData,
+        options: Options(
+          headers: {"Authorization": "Bearer $token"}, // Ajouté
+        ),
+      );
 
       if (response.statusCode == 200) {
         final locationDataJson = response.data as Map<String, dynamic>;
@@ -65,9 +93,14 @@ class LocationService {
   static Future<dynamic> updateLocation(
       String id, Map<String, dynamic> locationData) async {
     try {
+      String? token = await getToken(); // Ajouté
+
       final response = await _dio.put(
         url + putLocation.replaceAll(':id', id),
         data: locationData,
+        options: Options(
+          headers: {"Authorization": "Bearer $token"}, // Ajouté
+        ),
       );
 
       if (response.statusCode == 200) {
@@ -85,9 +118,14 @@ class LocationService {
   static Future<dynamic> deleteLocation(
       String id, Map<String, dynamic> locationData) async {
     try {
+      String? token = await getToken(); // Ajouté
+
       final response = await _dio.delete(
         url + delLocation.replaceAll(':id', id),
         data: locationData,
+        options: Options(
+          headers: {"Authorization": "Bearer $token"}, // Ajouté
+        ),
       );
 
       if (response.statusCode == 200) {

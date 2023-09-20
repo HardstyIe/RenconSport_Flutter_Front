@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:renconsport/models/group/message/message.dart';
-import 'package:renconsport/models/training/training.dart';
+import 'package:renconsport/models/training/training_details.dart';
 
 class User {
   final String? id;
@@ -13,8 +13,8 @@ class User {
   final DateTime? birthday;
   final bool? isAdmin;
   final String? avatar;
-  final List<Training>? createdTrainings;
-  final List<Training>? joinedTrainings;
+  final List<TrainingDetail>? createdTrainings;
+  final List<TrainingDetail>? joinedTrainings;
   final List<Message>? messages;
 
   User({
@@ -48,12 +48,12 @@ class User {
       avatar: json['avatar'],
       createdTrainings: json['createdTrainings'] != null
           ? (json['createdTrainings'] as List)
-              .map((i) => Training.fromJson(i))
+              .map((i) => TrainingDetail.fromJson(i))
               .toList()
           : null,
       joinedTrainings: json['joinedTrainings'] != null
           ? (json['joinedTrainings'] as List)
-              .map((i) => Training.fromJson(i))
+              .map((i) => TrainingDetail.fromJson(i))
               .toList()
           : null,
       messages: json['messages'] != null

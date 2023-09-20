@@ -1,3 +1,5 @@
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
 class ConstsAuth0 {
   static const String AUTH0_DOMAIN = "dev-rsb7ct14ymtfm6w1.eu.auth0.com";
   static const String AUTH0_CLIENT_ID = "eQzcSr1qbGm3l3ScTiJZc9bk7iulxBq2";
@@ -15,13 +17,14 @@ class GlobalData {
   factory GlobalData() => _instance;
   GlobalData._internal();
 
-  String? authToken;
+  // Ici, vous initialisez l'instance de FlutterSecureStorage
+  final storage = FlutterSecureStorage();
 
-  setToken(String token) {
-    authToken = token;
+  Future<void> setToken(String token) async {
+    await storage.write(key: 'authToken', value: token);
   }
 
-  String? getToken() {
-    return authToken;
+  Future<String?> getToken() async {
+    return await storage.read(key: 'authToken');
   }
 }

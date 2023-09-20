@@ -1,9 +1,7 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:renconsport/models/training/trainings_details.dart';
-import 'package:renconsport/provider/state.dart';
+import 'package:intl/intl.dart';
+import 'package:renconsport/models/training/training_details.dart';
 import 'package:renconsport/services/theme.dart';
 
 class TrainingList extends HookConsumerWidget {
@@ -11,18 +9,13 @@ class TrainingList extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    useEffect(() {
-      final cancelToken = CancelToken();
-      // Supposons que la méthode accepte un CancelToken pour annuler la requête
-      ref.read(loadTrainingDetailsProvider.future);
-      return () => cancelToken.cancel();
-    }, []);
-
     final trainingDetails = ref.watch(trainingDetailProvider);
+    print("Details: $trainingDetails");
 
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(20.0),
+        
         child: Column(
           children: <Widget>[
             _buildTitle(),
@@ -55,18 +48,25 @@ class TrainingList extends HookConsumerWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          if (detail.sport.icon != null)
-            Image.network(
-              detail.sport.icon!,
-              width: 50,
-              height: 20,
-            ),
-          if (detail.location.name != null) Text(detail.location.name!),
+          if (detail.sport?.icon != null) Icon(Icons.fitness_center),
           Column(
             children: [
-              if (detail.creator.firstName != null)
-                Text(detail.creator.firstName!),
-              if (detail.sport.name != null) Text(detail.sport.name!),
+              if (detail.user?.firstName != null) Text(detail.user!.firstName!),
+              if (detail.location?.type != null)
+                Text(detail.location!.type!.name)
+            ],
+          ),
+          Column(
+            children: [
+              if (detail.startedAt != null)
+                Column(
+                  children: [
+                    Text(
+                        "Début : ${DateFormat('dd-MM HH:mm').format(DateTime.parse(detail.startedAt.toString()))}"),
+                    Text(
+                        "Fin : ${DateFormat('dd-MM HH:mm').format(DateTime.parse(detail.finishedAt.toString()))}"),
+                  ],
+                ),
             ],
           ),
         ],

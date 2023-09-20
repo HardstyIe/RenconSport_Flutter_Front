@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:renconsport/constants/auth.dart';
 import 'package:renconsport/models/user/user.dart';
 
@@ -9,6 +10,7 @@ class AuthentificationServices {
   static const login = "auth/login";
   static const logout = "auth/logout";
   static final Dio _dio = Dio();
+  static final storage = new FlutterSecureStorage();
 
   static Future<User?> registerUser(
       Map<String, dynamic> userData, BuildContext context) async {
@@ -45,13 +47,15 @@ class AuthentificationServices {
       );
 
       if (result.statusCode != 201)
-        throw Exception("Erreur lors de la connection");
+        throw Exception("Erreur lors de la connexion");
       final userDataJson = result.data as Map<String, dynamic>;
 
       final user = User.fromJson(userDataJson);
       String token = userDataJson['token'];
 
-      GlobalData().setToken(token);
+      await storage.write(
+          key: 'authToken',
+          value: token); // Utilisation de Flutter Secure Storage
 
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text("Connexion réussie")));
