@@ -23,6 +23,7 @@ class _MessagePageState extends State<MessagePage> {
     setState(() {
       users = userList as List<User>?;
     });
+    print("Users loaded: ${users?.length ?? 0} users");
   }
 
   @override
@@ -89,13 +90,14 @@ class _MessagePageState extends State<MessagePage> {
             itemCount: users?.length ?? 0,
             itemBuilder: (context, index) {
               final user = users![index];
+              print("User $index: ${user.email}");
 
               return ListTile(
                 leading: CircleAvatar(
                   // Utilisez la photo de profil de l'utilisateur ici
                   backgroundColor: Colors.grey,
                 ),
-                title: Text('${user.first_name} ${user.last_name}'),
+                title: Text('${user.first_name} ${user.last_name}'), // Affiche le prénom et le nom
                 subtitle: Text(user.email ?? ''),
                 onTap: () {
                   // Naviguez vers la page de conversation ou l'action que vous souhaitez lorsque l'utilisateur appuie sur un utilisateur.
@@ -108,3 +110,4 @@ class _MessagePageState extends State<MessagePage> {
     );
   }
 }
+ 
