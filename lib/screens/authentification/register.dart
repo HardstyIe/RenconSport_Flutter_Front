@@ -28,7 +28,6 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(showBackButton: false),
       body: SingleChildScrollView(
         child: Form(
           key: _formKey,
