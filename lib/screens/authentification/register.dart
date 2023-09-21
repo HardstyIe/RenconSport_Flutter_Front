@@ -4,6 +4,7 @@ import 'package:renconsport/screens/authentification/login.dart';
 import 'package:renconsport/services/authentifications/authentificationService.dart';
 import 'package:renconsport/widgets/appbar.dart';
 import 'package:renconsport/widgets/text_widget_form.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -23,6 +24,31 @@ class _RegisterPageState extends State<RegisterPage> {
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
+  }
+
+  Future<void> _registerWithGoogle(BuildContext context) async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      if (googleUser != null) {
+        // Utilisez googleUser pour accéder aux informations de l'utilisateur Google
+
+        await AuthentificationServices.registerUser({
+          "email": googleUser.email,
+          // Vous pouvez utiliser d'autres informations de googleUser si nécessaire
+          "password": "", // Vous pouvez générer un mot de passe aléatoire si nécessaire
+        }, context);
+      } else {
+        // L'utilisateur a annulé la connexion avec Google
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Connexion avec Google annulée'),
+          ),
+        );
+      }
+    } catch (error) {
+      print("Erreur d'inscription avec Google : $error");
+    }
   }
 
   @override
@@ -75,7 +101,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       (EmailValidator.validate(emailController.text) == true)) {
                     await AuthentificationServices.registerUser({
                       "email": emailController.text,
-                      "password": passwordController.text
+                      "password": passwordController.text,
                     }, context);
                   }
                 },
@@ -89,7 +115,11 @@ class _RegisterPageState extends State<RegisterPage> {
                 },
                 child: Text('Déjà inscrit ? Connectez-vous !'),
               ),
-              // APPEL API IICI  ?
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () => _registerWithGoogle(context),
+                child: Text("S'inscrire avec Google"),
+              ),
             ],
           ),
         ),
