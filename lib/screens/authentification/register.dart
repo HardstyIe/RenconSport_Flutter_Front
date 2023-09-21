@@ -76,7 +76,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       (EmailValidator.validate(emailController.text) == true)) {
                     await AuthentificationServices.registerUser({
                       "email": emailController.text,
-                      "password": passwordController.text,
+                      "password": passwordController.text
                     }, context);
                   }
                 },

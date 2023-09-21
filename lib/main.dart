@@ -1,32 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:renconsport/models/training/training_details.dart';
+import 'package:renconsport/models/user/user.dart';
 import 'package:renconsport/screens/authentification/register.dart';
-import 'package:renconsport/screens/homepage/home.dart';
 import 'package:renconsport/services/theme.dart';
 import 'package:renconsport/widgets/appbar.dart';
-import 'package:renconsport/widgets/bottomappbar.dart';
-import 'package:firebase_core/firebase_core.dart'; // Ajoutez cette importation
-import 'package:firebase_messaging/firebase_messaging.dart'; // Ajoutez cette importation
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(const MyApp());
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp();
+  // await FirebaseApi().initNotifications();
+  runApp(
+    ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key});
+class MyApp extends ConsumerWidget {
+  const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
+    final user = ref.watch(userProvider);
+    final training = ref.watch(trainingDetailProvider);
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: CustomTheme.defaultTheme,
       home: Scaffold(
-        body: Home(),
         appBar: CustomAppBar(
           showBackButton: false,
         ),
+        body: RegisterPage(),
       ),
     );
   }

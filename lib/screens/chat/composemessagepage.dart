@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:renconsport/services/groups/messages/messageService.dart';
 import 'package:renconsport/services/messages/messageService.dart';
 
 class ComposeMessagePage extends StatefulWidget {
@@ -23,7 +24,6 @@ class _ComposeMessagePageState extends State<ComposeMessagePage> {
       final sentMessage = await MessageService.sendMessage(messageData);
 
       if (sentMessage != null) {
-
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Message envoyé'),

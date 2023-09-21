@@ -1,21 +1,30 @@
 class Message {
-  final String id;
-  final String chatGroupId;
-  final String senderId;
-  final String content;
-  final DateTime sendAt;
+  final String? id;
+  final String? groupId;
+  final String? senderId;
+  final String? content;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
 
-  Message(
+  Message({
     this.id,
-    this.chatGroupId,
+    this.groupId,
     this.senderId,
     this.content,
-    this.sendAt,
-  );
-  Message.fromJson(Map<String, dynamic> json)
-      : id = json["id"],
-        chatGroupId = json["chatGroupId"],
-        senderId = json["senderId"],
-        content = json["content"],
-        sendAt = json["sendAt"];
+    this.createdAt,
+    this.updatedAt,
+  });
+
+  factory Message.fromJson(Map<String, dynamic> json) {
+    return Message(
+      id: json['id'],
+      groupId: json['groupId'],
+      senderId: json['senderId'],
+      content: json['content'],
+      createdAt:
+          json['createdAt'] != null ? DateTime.parse(json['createdAt']) : null,
+      updatedAt:
+          json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : null,
+    );
+  }
 }

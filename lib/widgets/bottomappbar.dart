@@ -13,11 +13,14 @@ class CustomNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: icons.map((e) {
-          int index = icons.indexOf(e);
-          return IconButton(onPressed: () => onTap(index), icon: Icon(e));
-        }).toList());
+    return Container(
+      color: Theme.of(context).primaryColor,
+      child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: icons.map((e) {
+            int index = icons.indexOf(e);
+            return IconButton(onPressed: () => onTap(index), icon: Icon(e));
+          }).toList()),
+    );
   }
 }

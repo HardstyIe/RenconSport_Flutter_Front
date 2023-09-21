@@ -7,21 +7,8 @@ buildscript {
 
     dependencies {
         classpath 'com.android.tools.build:gradle:7.3.0'
-        // START: FlutterFire Configuration
-        classpath 'com.google.gms:google-services:4.3.10'
-        // END: FlutterFire Configuration
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
-    plugins {
-        id 'com.android.application'
-        id 'com.google.gms.google-services'
-    }
-    dependencies {
-        implementation platform('com.google.firebase:firebase-bom:32.2.3')
-        implementation 'com.google.firebase:firebase-analytics-ktx'
-    }
-
-
 }
 
 allprojects {
