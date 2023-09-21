@@ -1,7 +1,9 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:renconsport/screens/authentification/login.dart';
 import 'package:renconsport/services/authentifications/authentificationService.dart';
+import 'package:renconsport/services/theme.dart';
 import 'package:renconsport/widgets/appbar.dart';
 import 'package:renconsport/widgets/text_widget_form.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -31,15 +33,12 @@ class _RegisterPageState extends State<RegisterPage> {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
       if (googleUser != null) {
-        // Utilisez googleUser pour accéder aux informations de l'utilisateur Google
 
         await AuthentificationServices.registerUser({
           "email": googleUser.email,
-          // Vous pouvez utiliser d'autres informations de googleUser si nécessaire
-          "password": "", // Vous pouvez générer un mot de passe aléatoire si nécessaire
+          "password": "",
         }, context);
       } else {
-        // L'utilisateur a annulé la connexion avec Google
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Connexion avec Google annulée'),
@@ -117,9 +116,19 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               SizedBox(height: 20),
               ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                ),
                 onPressed: () => _registerWithGoogle(context),
-                child: Text("S'inscrire avec Google"),
+                child: Text(
+                  "S'inscrire avec Google",
+                  style: GoogleFonts.montserrat(
+                    fontSize: 16,
+                    color: Colors.white,
+                  ),
+                ),
               ),
+
             ],
           ),
         ),

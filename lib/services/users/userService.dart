@@ -18,7 +18,7 @@ class UserServices {
 
   static Future<User?> getPersonalInfo() async {
     try {
-      String? token = await getToken(); // Ajouté
+      String? token = await getToken();
 
       if (token == null) {
         print("Token est null");
@@ -47,7 +47,7 @@ class UserServices {
 
   static Future<List<User>?> getAllUserInfo() async {
     try {
-      String? token = await getToken(); // Ajouté
+      String? token = await getToken();
 
       if (token == null) {
         print("Token est null");
@@ -80,7 +80,7 @@ class UserServices {
 
   static Future<User?> getOneUserInfo(String uuid) async {
     try {
-      String? token = await getToken(); // Ajouté
+      String? token = await getToken();
 
       if (token == null) {
         print("Token est null");
@@ -110,7 +110,7 @@ class UserServices {
 
   static Future<User?> putUserInfo(String uuid) async {
     try {
-      String? token = await getToken(); // Ajouté
+      String? token = await getToken();
 
       if (token == null) {
         print("Token est null");

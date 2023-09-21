@@ -1,6 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:renconsport/models/training/training_details.dart';
 import 'package:renconsport/models/user/user.dart';
 import 'package:renconsport/screens/authentification/register.dart';
@@ -138,8 +139,17 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             ),
             SizedBox(height: 20),
             ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
+              ),
               onPressed: () => _loginWithGoogle(context),
-              child: Text("Se connecter avec Google"),
+              child: Text(
+                "Se connecter avec Google",
+                style: GoogleFonts.montserrat(
+                  fontSize: 16,
+                  color: Colors.white,
+                ),
+              ),
             ),
           ],
         ),
