@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:renconsport/screens/authentification/login.dart';
 import 'package:renconsport/services/authentifications/authentificationService.dart';
+import 'package:renconsport/services/authentifications/googleAuthService.dart';
 import 'package:renconsport/services/theme.dart';
 import 'package:renconsport/widgets/appbar.dart';
 import 'package:renconsport/widgets/text_widget_form.dart';
@@ -28,27 +29,7 @@ class _RegisterPageState extends State<RegisterPage> {
     super.dispose();
   }
 
-  Future<void> _registerWithGoogle(BuildContext context) async {
-    try {
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
-      if (googleUser != null) {
-
-        await AuthentificationServices.registerUser({
-          "email": googleUser.email,
-          "password": "",
-        }, context);
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Connexion avec Google annulée'),
-          ),
-        );
-      }
-    } catch (error) {
-      print("Erreur d'inscription avec Google : $error");
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -115,19 +96,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: Text('Déjà inscrit ? Connectez-vous !'),
               ),
               SizedBox(height: 20),
-              ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
-                ),
-                onPressed: () => _registerWithGoogle(context),
-                child: Text(
-                  "S'inscrire avec Google",
-                  style: GoogleFonts.montserrat(
-                    fontSize: 16,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
+
 
             ],
           ),
