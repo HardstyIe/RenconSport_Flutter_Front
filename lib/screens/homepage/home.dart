@@ -5,7 +5,7 @@ import 'package:renconsport/widgets/appbar.dart';
 import 'package:renconsport/widgets/bottomappbar.dart';
 import 'package:renconsport/widgets/message/message_widget.dart';
 import 'package:renconsport/widgets/profile/profile_widget.dart';
-import 'package:renconsport/widgets/swipe/tinder_like.dart';
+import 'package:renconsport/widgets/swipe/swipe.dart';
 import 'package:renconsport/widgets/training/training_widget.dart';
 
 class Home extends ConsumerStatefulWidget {
