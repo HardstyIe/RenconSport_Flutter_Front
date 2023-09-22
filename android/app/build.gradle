@@ -27,15 +27,11 @@ android {
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
-    compileOptions {
-        compileOptions {
-    sourceCompatibility 11 
-    targetCompatibility 11
-  }
-    }
+    
+    
 
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '11'
     }
 
     sourceSets {
