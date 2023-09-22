@@ -6,6 +6,7 @@ class SportService {
   static final url = Api.NESTJS_BASE_URL;
   static final allSport = "sports";
   static final sport = "sports/:id";
+  static final allSportWithExercice = "sports/with-exercice";
   static final sendSport = "sports/:id";
   static final putSport = "sports/:id";
   static final delSport = "sports/:id";
@@ -34,6 +35,29 @@ class SportService {
           return data;
         }).toList();
         return sports;
+      } else {
+        throw Exception('Failed to fetch sports');
+      }
+    } catch (error) {
+      throw Exception('Failed to fetch sports: $error');
+    }
+  }
+
+  static Future<List<dynamic>> getAllSportWithExercice() async {
+    try {
+      String? token = await getToken(); // Ajouté
+
+      final response = await _dio.get(
+        url + allSportWithExercice,
+        options: Options(
+          headers: {"Authorization": "Bearer $token"}, // Ajouté
+        ),
+      );
+
+      if (response.statusCode == 200) {
+        final List<Map<String, dynamic>> sportDataList =
+            (response.data as List).cast<Map<String, dynamic>>();
+        return sportDataList;
       } else {
         throw Exception('Failed to fetch sports');
       }

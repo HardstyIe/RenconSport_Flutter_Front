@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:renconsport/models/training/training_details.dart';
 import 'package:renconsport/models/user/user.dart';
-import 'package:renconsport/screens/homepage/home.dart';
+import 'package:renconsport/screens/authentification/register.dart';
 import 'package:renconsport/services/theme.dart';
 import 'package:renconsport/widgets/appbar.dart';
 
@@ -33,7 +33,7 @@ class MyApp extends ConsumerWidget {
         appBar: CustomAppBar(
           showBackButton: false,
         ),
-        body: Home(),
+        body: RegisterPage(),
       ),
     );
   }

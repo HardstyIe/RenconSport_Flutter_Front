@@ -7,7 +7,7 @@ class TrainingService {
   static final url = Api.NESTJS_BASE_URL;
   static final allTraining = "trainings";
   static final training = "trainings/:id";
-  static final sendTraining = "trainings/:id";
+  static final sendTraining = "trainings";
   static final putTraining = "trainings/:id";
   static final delTraining = "trainings/:id";
 

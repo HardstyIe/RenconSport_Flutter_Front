@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:renconsport/widgets/swipe/popup/popup_bio.dart';
 import 'package:swipe_cards/draggable_card.dart';
 import 'package:swipe_cards/swipe_cards.dart';
 
@@ -96,7 +97,7 @@ class _SwipeCardState extends State<SwipeCard> {
                 ));
               },
               itemChanged: (SwipeItem item, int index) {
-                print("item: ${item.content["index"]}, index: $index");
+                print("item: ${item.content[""]}, index: $index");
               },
               leftSwipeAllowed: true,
               rightSwipeAllowed: true,
@@ -116,13 +117,7 @@ class _SwipeCardState extends State<SwipeCard> {
                     BoxDecoration(border: Border.all(color: Colors.red)),
                 child: Text('Nope'),
               ),
-              superLikeTag: Container(
-                margin: const EdgeInsets.all(15.0),
-                padding: const EdgeInsets.all(3.0),
-                decoration:
-                    BoxDecoration(border: Border.all(color: Colors.orange)),
-                child: Text('Super Like'),
-              ),
+              superLikeTag: PopupBio(),
             ),
           ),
           Align(
@@ -135,11 +130,7 @@ class _SwipeCardState extends State<SwipeCard> {
                       _matchEngine!.currentItem?.nope();
                     },
                     child: Text("Nope")),
-                ElevatedButton(
-                    onPressed: () {
-                      _matchEngine!.currentItem?.superLike();
-                    },
-                    child: Text("Superlike")),
+                PopupBio(),
                 ElevatedButton(
                     onPressed: () {
                       _matchEngine!.currentItem?.like();

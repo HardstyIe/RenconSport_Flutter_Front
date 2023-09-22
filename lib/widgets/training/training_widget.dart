@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:renconsport/models/training/sport/sport.dart';
 import 'package:renconsport/models/training/training_details.dart';
 import 'package:renconsport/services/theme.dart';
+import 'package:renconsport/widgets/searchBar/filtre.dart';
 
 class TrainingList extends HookConsumerWidget {
   const TrainingList({Key? key}) : super(key: key);
@@ -10,21 +13,41 @@ class TrainingList extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final trainingDetails = ref.watch(trainingDetailProvider);
-    print("Details: $trainingDetails");
+    final sports = ref.watch(sportProvider);
+    final sportNotifier = ref.read(sportProvider.notifier);
+    List<String> searchResults = [];
 
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        
-        child: Column(
-          children: <Widget>[
-            _buildTitle(),
-            SizedBox(height: 20),
-            ...trainingDetails
-                .map((detail) => _buildTrainingItem(detail))
-                .toList(),
-          ],
+    print(trainingDetails);
+
+    useEffect(() {
+      sportNotifier.fetchSports();
+      return null;
+    }, const []);
+
+    return Scaffold(
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            children: <Widget>[
+              _buildTitle(),
+              SizedBox(height: 20),
+              ...trainingDetails
+                  .map((detail) => _buildTrainingItem(detail))
+                  .toList(),
+            ],
+          ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute<void>(
+            builder: (BuildContext context) {
+              return Filter();
+            },
+          ));
+        },
+        child: Icon(Icons.search),
       ),
     );
   }
