@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:renconsport/services/groups/messages/messageService.dart';
-import 'package:renconsport/services/messages/messageService.dart';
 
 class ComposeMessagePage extends StatefulWidget {
   @override
@@ -21,7 +20,7 @@ class _ComposeMessagePageState extends State<ComposeMessagePage> {
         "sendAt": DateTime.now().toIso8601String(),
       };
 
-      final sentMessage = await MessageService.sendMessage(messageData);
+      final sentMessage = await MessageService.createMessage(messageData);
 
       if (sentMessage != null) {
         ScaffoldMessenger.of(context).showSnackBar(

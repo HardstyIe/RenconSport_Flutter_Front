@@ -7,6 +7,8 @@ import 'package:renconsport/widgets/message/message_widget.dart';
 import 'package:renconsport/widgets/profile/profile_widget.dart';
 import 'package:renconsport/widgets/swipe/swipe.dart';
 import 'package:renconsport/widgets/training/training_widget.dart';
+import 'package:renconsport/services/notifications/notification_service.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class Home extends ConsumerStatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -16,6 +18,28 @@ class Home extends ConsumerStatefulWidget {
 }
 
 class _HomeState extends ConsumerState<Home> {
+  final NotificationService _notificationService = NotificationService();
+  String? _fcmToken;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _notificationService.getFCMToken().then((token) {
+      setState(() {
+        _fcmToken = token;
+      });
+      print("Firebase Messaging Token: $_fcmToken");
+    });
+
+    _notificationService.subscribeToTokenRefresh((String newToken) {
+      setState(() {
+        _fcmToken = newToken;
+      });
+      print("Nouveau Firebase Messaging Token après rafraîchissement: $_fcmToken");
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final index = ref.watch(currentIndexProvider);

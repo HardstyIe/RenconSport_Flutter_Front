@@ -18,7 +18,7 @@ class UserServices {
 
   static Future<User?> getPersonalInfo() async {
     try {
-      String? token = await getToken(); // Ajouté
+      String? token = await getToken();
 
       if (token == null) {
         print("Token est null");
@@ -45,9 +45,9 @@ class UserServices {
     }
   }
 
-  static Future<User?> getAllUserInfo() async {
+  static Future<List<User>?> getAllUserInfo() async {
     try {
-      String? token = await getToken(); // Ajouté
+      String? token = await getToken();
 
       if (token == null) {
         print("Token est null");
@@ -64,9 +64,11 @@ class UserServices {
       );
 
       if (response.statusCode == 200) {
-        final userDataJson = response.data as Map<String, dynamic>;
-        final user = User.fromJson(userDataJson);
-        return user;
+        final List<dynamic> userDataList = response.data as List<dynamic>;
+        final List<User> users = userDataList.map((data) {
+          return User.fromJson(data as Map<String, dynamic>);
+        }).toList();
+        return users;
       }
     } catch (error) {
       print("Erreur lors de la récupération des infos utilisateur: $error");
@@ -75,9 +77,10 @@ class UserServices {
     return null;
   }
 
+
   static Future<User?> getOneUserInfo(String uuid) async {
     try {
-      String? token = await getToken(); // Ajouté
+      String? token = await getToken();
 
       if (token == null) {
         print("Token est null");
@@ -107,7 +110,7 @@ class UserServices {
 
   static Future<User?> putUserInfo(String uuid) async {
     try {
-      String? token = await getToken(); // Ajouté
+      String? token = await getToken();
 
       if (token == null) {
         print("Token est null");

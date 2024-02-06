@@ -1,8 +1,13 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:renconsport/screens/authentification/login.dart';
 import 'package:renconsport/services/authentifications/authentificationService.dart';
+import 'package:renconsport/services/authentifications/googleAuthService.dart';
+import 'package:renconsport/services/theme.dart';
+import 'package:renconsport/widgets/appbar.dart';
 import 'package:renconsport/widgets/text_widget_form.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -23,6 +28,8 @@ class _RegisterPageState extends State<RegisterPage> {
     passwordController.dispose();
     super.dispose();
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +81,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       (EmailValidator.validate(emailController.text) == true)) {
                     await AuthentificationServices.registerUser({
                       "email": emailController.text,
-                      "password": passwordController.text
+                      "password": passwordController.text,
                     }, context);
                   }
                 },
@@ -88,6 +95,9 @@ class _RegisterPageState extends State<RegisterPage> {
                 },
                 child: Text('Déjà inscrit ? Connectez-vous !'),
               ),
+              SizedBox(height: 20),
+
+
             ],
           ),
         ),

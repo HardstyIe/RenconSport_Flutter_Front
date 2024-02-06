@@ -9,7 +9,7 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.exampe.renconsport</string>
+	<string>com.example.renconsport</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -45,18 +45,24 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
-  <key>CFBundleURLTypes</key>
-<array>
-    <dict>
-        <key>CFBundleTypeRole</key>
-        <string>None</string>
-        <key>CFBundleURLSchemes</key>
-        <array>
-            <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-        </array>
-    </dict>
-</array>
-
-
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.7717666132-48rrjhi952ti20c7ebp6tpodbhp7t40p</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>None</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

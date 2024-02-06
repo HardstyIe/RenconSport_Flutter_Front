@@ -17,8 +17,8 @@ class _SwipeCardState extends State<SwipeCard> {
   MatchEngine? _matchEngine;
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   List<String> _names = [
-    "Red",
-    "Blue",
+    "Brown",
+    "Teal",
     "Green",
     "Yellow",
     "Orange",
@@ -27,8 +27,8 @@ class _SwipeCardState extends State<SwipeCard> {
     "Pink"
   ];
   List<Color> _colors = [
-    Colors.red,
-    Colors.blue,
+    Colors.brown,
+    Colors.teal,
     Colors.green,
     Colors.yellow,
     Colors.orange,
@@ -51,12 +51,6 @@ class _SwipeCardState extends State<SwipeCard> {
           nopeAction: () {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Text("Nope ${_names[i]}"),
-              duration: Duration(milliseconds: 500),
-            ));
-          },
-          superlikeAction: () {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text("Superliked ${_names[i]}"),
               duration: Duration(milliseconds: 500),
             ));
           },
@@ -97,7 +91,7 @@ class _SwipeCardState extends State<SwipeCard> {
                 ));
               },
               itemChanged: (SwipeItem item, int index) {
-                print("item: ${item.content[""]}, index: $index");
+                print("item: ${item.content["index"]}, index: $index");
               },
               leftSwipeAllowed: true,
               rightSwipeAllowed: true,
@@ -117,7 +111,6 @@ class _SwipeCardState extends State<SwipeCard> {
                     BoxDecoration(border: Border.all(color: Colors.red)),
                 child: Text('Nope'),
               ),
-              superLikeTag: PopupBio(),
             ),
           ),
           Align(
@@ -125,54 +118,26 @@ class _SwipeCardState extends State<SwipeCard> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                ElevatedButton(
-                    onPressed: () {
-                      _matchEngine!.currentItem?.nope();
-                    },
-                    child: Text("Nope")),
+                IconButton(
+                  icon: Icon(Icons.close),
+                  iconSize: 55,
+                  color: Colors.red,
+                  onPressed: () {
+                    _matchEngine!.currentItem?.nope();
+                  },
+                ),
                 PopupBio(),
-                ElevatedButton(
-                    onPressed: () {
-                      _matchEngine!.currentItem?.like();
-                    },
-                    child: Text("Like"))
+                IconButton(
+                  icon: Icon(Icons.thumb_up_alt_sharp),
+                  iconSize: 50,
+                  color: Colors.blue,
+                  onPressed: () {
+                    _matchEngine!.currentItem?.like();
+                  },
+                ),
               ],
             ),
           )
         ])));
   }
 }
-
-
-
-
-
-
-  // @override
-  // Widget build(BuildContext context) {
-  //   return Container(
-  //       child: Row(
-  //           crossAxisAlignment: CrossAxisAlignment.end,
-  //           mainAxisAlignment: MainAxisAlignment.spaceAround,
-  //           children: [
-  //             IconButton(
-  //               icon: Icon(Icons.close),
-  //               iconSize: 55,
-  //               color: Colors.red,
-  //               onPressed: () {},
-  //             ),
-  //             PopupBio(),
-  //             IconButton(
-  //               icon: Icon(Icons.thumb_up_alt_sharp),
-  //               iconSize: 50,
-  //               color: Colors.blue,
-  //               onPressed: () {},
-  //             ),
-  //           ]),
-  //       height: MediaQuery.of(context).size.width * 2,
-  //       width: MediaQuery.of(context).size.width,
-  //       decoration: BoxDecoration(
-  //           image: DecorationImage(
-  //               image: AssetImage('assets/muscu.png'), fit: BoxFit.cover)));
-  // }
-// }
